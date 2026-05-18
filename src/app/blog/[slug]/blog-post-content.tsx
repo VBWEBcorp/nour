@@ -1,26 +1,11 @@
 'use client'
 
-import { useEffect, useState, use } from 'react'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowLeft, Calendar, User, Tag, Clock } from 'lucide-react'
 
-interface BlogPost {
-  _id: string
-  title: string
-  slug: string
-  excerpt: string
-  content: string
-  coverImage: string
-  category: string
-  tags: string[]
-  author: string
-  published: boolean
-  publishedAt: string
-  metaTitle?: string
-  metaDescription?: string
-}
+import type { StaticBlogPost } from '@/data/blog-posts'
 
 const ease = [0.22, 1, 0.36, 1] as const
 
@@ -30,53 +15,7 @@ function estimateReadTime(html: string) {
   return Math.max(1, Math.ceil(words / 200))
 }
 
-export default function BlogPostContent({ slug }: { slug: string }) {
-  const [post, setPost] = useState<BlogPost | null>(null)
-  const [loading, setLoading] = useState(true)
-  const [notFound, setNotFound] = useState(false)
-
-  useEffect(() => {
-    const fetchPost = async () => {
-      try {
-        const response = await fetch(`/api/blog/posts/${slug}`)
-        if (!response.ok) {
-          setNotFound(true)
-          return
-        }
-        const data = await response.json()
-        if (!data.published) {
-          setNotFound(true)
-          return
-        }
-        setPost(data)
-      } catch {
-        setNotFound(true)
-      } finally {
-        setLoading(false)
-      }
-    }
-    fetchPost()
-  }, [slug])
-
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-muted-foreground">Chargement...</div>
-      </div>
-    )
-  }
-
-  if (notFound || !post) {
-    return (
-      <div className="min-h-screen flex flex-col items-center justify-center gap-4">
-        <p className="text-muted-foreground text-lg">Article introuvable.</p>
-        <Link href="/blog" className="text-primary underline underline-offset-4 hover:text-primary/80 text-sm">
-          Retour au blog
-        </Link>
-      </div>
-    )
-  }
-
+export default function BlogPostContent({ post }: { post: StaticBlogPost }) {
   const readTime = estimateReadTime(post.content)
   const formattedDate = new Date(post.publishedAt).toLocaleDateString('fr-FR', {
     day: 'numeric',
@@ -101,7 +40,6 @@ export default function BlogPostContent({ slug }: { slug: string }) {
         </div>
       )}
 
-      {/* Content */}
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
@@ -109,7 +47,6 @@ export default function BlogPostContent({ slug }: { slug: string }) {
           transition={{ duration: 0.5, ease }}
           className={post.coverImage ? '-mt-20 relative z-10' : 'pt-16'}
         >
-          {/* Back link */}
           <Link
             href="/blog"
             className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors mb-6"
@@ -118,7 +55,6 @@ export default function BlogPostContent({ slug }: { slug: string }) {
             Retour au blog
           </Link>
 
-          {/* Header */}
           <header className="space-y-4 mb-10">
             <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
               {post.category && (
@@ -153,13 +89,11 @@ export default function BlogPostContent({ slug }: { slug: string }) {
             )}
           </header>
 
-          {/* Article body, rendered HTML from TipTap */}
           <div
             className="blog-content pb-16"
             dangerouslySetInnerHTML={{ __html: post.content }}
           />
 
-          {/* Tags */}
           {post.tags?.length > 0 && (
             <div className="border-t border-border/60 py-8 flex flex-wrap items-center gap-2">
               <Tag className="size-4 text-muted-foreground" />
@@ -174,7 +108,6 @@ export default function BlogPostContent({ slug }: { slug: string }) {
             </div>
           )}
 
-          {/* CTA bottom */}
           <div className="border-t border-border/60 py-12 text-center space-y-4">
             <p className="text-lg font-semibold text-foreground">Cet article vous a plu ?</p>
             <p className="text-sm text-muted-foreground">
@@ -198,7 +131,6 @@ export default function BlogPostContent({ slug }: { slug: string }) {
         </motion.div>
       </div>
 
-      {/* Blog content styles */}
       <style jsx global>{`
         .blog-content {
           font-size: 0.9375rem;

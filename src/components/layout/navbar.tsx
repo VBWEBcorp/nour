@@ -16,49 +16,18 @@ interface NavLink {
 }
 
 const defaultLinks: NavLink[] = [
-  { to: '/', label: 'Accueil' },
   { to: '/a-propos', label: 'À propos' },
   { to: '/services', label: 'Services' },
-  { to: '/gallery', label: 'Galerie' },
   { to: '/blog', label: 'Blog' },
-  { to: '/contact', label: 'Contact' },
+  { to: '/candidats', label: 'Candidats' },
 ]
 
 export function Navbar() {
   const [open, setOpen] = useState(false)
-  const [links, setLinks] = useState<NavLink[]>(defaultLinks)
+  const [links] = useState<NavLink[]>(defaultLinks)
   const [scrolled, setScrolled] = useState(false)
   const [hoveredKey, setHoveredKey] = useState<string | null>(null)
   const pathname = usePathname()
-
-  useEffect(() => {
-    const checkFeatures = async () => {
-      try {
-        const [galleryRes, blogRes] = await Promise.all([
-          fetch('/api/gallery/settings'),
-          fetch('/api/blog/settings'),
-        ])
-        const gallery = await galleryRes.json()
-        const blog = await blogRes.json()
-
-        const dynamicLinks: NavLink[] = [
-          { to: '/', label: 'Accueil' },
-          { to: '/a-propos', label: 'À propos' },
-          { to: '/services', label: 'Services' },
-        ]
-
-        if (gallery?.enabled !== false) dynamicLinks.push({ to: '/gallery', label: 'Galerie' })
-        if (blog?.enabled !== false) dynamicLinks.push({ to: '/blog', label: 'Blog' })
-
-        dynamicLinks.push({ to: '/contact', label: 'Contact' })
-        setLinks(dynamicLinks)
-      } catch {
-        // Liens par défaut conservés en cas d'erreur
-      }
-    }
-
-    checkFeatures()
-  }, [])
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8)

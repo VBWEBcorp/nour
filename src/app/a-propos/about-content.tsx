@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { ChevronRight, Home } from 'lucide-react'
+import { ChevronRight, Home, Linkedin } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRef } from 'react'
@@ -184,6 +184,130 @@ function AboutHero({ hero }: { hero: typeof defaults.hero }) {
   )
 }
 
+function TeamSection({ team }: { team: typeof defaults.team }) {
+  return (
+    <section className="border-b border-border/60 bg-background">
+      <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.55, ease }}
+          className="mx-auto max-w-3xl text-center"
+        >
+          <p className="font-display text-[11px] font-semibold tracking-[0.22em] text-primary uppercase">
+            {team.eyebrow}
+          </p>
+          <h2 className="mt-4 font-display text-balance text-3xl leading-[1.1] tracking-[-0.02em] text-foreground sm:text-4xl lg:text-[44px]">
+            {team.title}
+          </h2>
+          <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-[17px]">
+            {team.description}
+          </p>
+        </motion.div>
+
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.15 }}
+          variants={{
+            hidden: {},
+            visible: { transition: { staggerChildren: 0.12, delayChildren: 0.15 } },
+          }}
+          className="mt-16 grid gap-8 md:grid-cols-2 lg:gap-10"
+        >
+          {team.members.map((m) => (
+            <motion.article
+              key={m.name}
+              variants={{
+                hidden: { opacity: 0, y: 24 },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease } },
+              }}
+              className="group relative overflow-hidden rounded-3xl border border-border/60 bg-card shadow-[0_20px_50px_-20px_oklch(0.2_0.02_264/0.18)] transition-all hover:shadow-[0_30px_70px_-20px_oklch(0.55_0.2_285/0.25)]"
+            >
+              {/* Bordure dégradée subtile */}
+              <div
+                className="pointer-events-none absolute inset-0 rounded-3xl p-px opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                aria-hidden
+                style={{
+                  background:
+                    'linear-gradient(135deg, oklch(0.55 0.2 285 / 0.4) 0%, oklch(0.91 0.012 264 / 0.5) 50%, oklch(0.55 0.2 285 / 0.4) 100%)',
+                  WebkitMask:
+                    'linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)',
+                  WebkitMaskComposite: 'xor',
+                  maskComposite: 'exclude',
+                }}
+              />
+
+              {/* Portrait — aspect 4/5, zoom léger au hover */}
+              <div className="relative aspect-[4/5] overflow-hidden bg-muted">
+                <Image
+                  src={m.photo}
+                  alt={`Portrait de ${m.name}`}
+                  fill
+                  sizes="(min-width:768px) 45vw, 100vw"
+                  className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                />
+                {/* Voile dégradé bas pour lisibilité */}
+                <div
+                  className="pointer-events-none absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-black/55 via-black/10 to-transparent"
+                  aria-hidden
+                />
+                {/* Nom + rôle sur l'image */}
+                <div className="absolute inset-x-0 bottom-0 p-6">
+                  <h3 className="font-display text-2xl font-semibold tracking-tight text-white sm:text-[28px]">
+                    {m.name}
+                  </h3>
+                  <p className="mt-1 text-sm font-medium text-white/80">{m.role}</p>
+                </div>
+              </div>
+
+              {/* Bio + highlights */}
+              <div className="p-7 sm:p-8">
+                <p className="text-[15px] leading-relaxed text-muted-foreground">{m.bio}</p>
+
+                <ul className="mt-6 space-y-2.5">
+                  {m.highlights.map((h) => (
+                    <li key={h} className="flex items-start gap-3 text-sm text-foreground/85">
+                      <span
+                        className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-primary/15 text-primary"
+                        aria-hidden
+                      >
+                        <svg viewBox="0 0 12 12" fill="none" className="size-3">
+                          <path
+                            d="M2.5 6L5 8.5L9.5 4"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                      </span>
+                      {h}
+                    </li>
+                  ))}
+                </ul>
+
+                {m.linkedIn && (
+                  <a
+                    href={m.linkedIn}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-7 inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+                  >
+                    <Linkedin className="size-4" aria-hidden />
+                    <span>Voir le profil de {m.firstName} sur LinkedIn</span>
+                  </a>
+                )}
+              </div>
+            </motion.article>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  )
+}
+
 function ValuesTimeline({ values }: { values: any[] }) {
   const ref = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({
@@ -287,12 +411,15 @@ function ValuesTimeline({ values }: { values: any[] }) {
 export function AboutContent() {
   const { data } = useContent('about', defaults)
   const hero = data.hero ?? defaults.hero
+  const team = data.team ?? defaults.team
   const values = data.values ?? defaults.values
   const gallery = data.gallery ?? defaults.gallery
 
   return (
     <>
       <AboutHero hero={hero} />
+
+      <TeamSection team={team} />
 
       <section className="border-b border-border/60 bg-background">
         <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">

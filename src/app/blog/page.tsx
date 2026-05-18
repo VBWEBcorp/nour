@@ -1,112 +1,74 @@
 import type { Metadata } from 'next'
 
-import { connectDB } from '@/lib/db'
-import { BlogSettings, BlogPost } from '@/models/Blog'
-import { visiblePostFilter } from '@/lib/blog-filters'
+import { blogPosts, blogSettings } from '@/data/blog-posts'
 import { siteConfig } from '@/lib/seo'
 import BlogPageContent from './blog-page-content'
 
-export const revalidate = 3600
-
-export async function generateMetadata(): Promise<Metadata> {
-  try {
-    await connectDB()
-    const settings = await BlogSettings.findOne().lean() as any
-
-    const title = settings?.title || 'Blog'
-    const description = settings?.description || 'Découvrez nos articles, conseils et actualités.'
-
-    return {
-      title,
-      description,
-      openGraph: {
-        type: 'website',
-        title,
-        description,
-        url: `${siteConfig.url}/blog`,
-        siteName: siteConfig.name,
-        locale: siteConfig.locale,
-        images: settings?.heroImage ? [{ url: settings.heroImage }] : [],
-      },
-      twitter: {
-        card: 'summary_large_image',
-        title,
-        description,
-        images: settings?.heroImage ? [settings.heroImage] : [],
-      },
-      alternates: {
-        canonical: '/blog',
-      },
-    }
-  } catch {
-    return { title: 'Blog' }
-  }
+export const metadata: Metadata = {
+  title: blogSettings.title,
+  description: blogSettings.description,
+  openGraph: {
+    type: 'website',
+    title: blogSettings.title,
+    description: blogSettings.description,
+    url: `${siteConfig.url}/blog`,
+    siteName: siteConfig.name,
+    locale: siteConfig.locale,
+    images: blogSettings.heroImage ? [{ url: blogSettings.heroImage }] : [],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: blogSettings.title,
+    description: blogSettings.description,
+    images: blogSettings.heroImage ? [blogSettings.heroImage] : [],
+  },
+  alternates: { canonical: '/blog' },
 }
 
-const defaultSettings = {
-  enabled: true,
-  title: 'Nos dernières actualités',
-  description: 'Retrouvez nos conseils, nos projets récents et les tendances du secteur.',
-  eyebrow: 'Blog',
-}
-
-export default async function BlogPage() {
-  let settings: any = defaultSettings
-  let posts: any[] = []
-  let jsonLd = null
-
-  try {
-    await connectDB()
-    const [settingsDoc, postsDocs] = await Promise.all([
-      BlogSettings.findOne().lean(),
-      BlogPost.find(visiblePostFilter())
-        .sort({ publishedAt: -1, createdAt: -1 })
-        .select('title slug excerpt coverImage category tags author publishedAt')
-        .limit(50)
-        .lean(),
-    ])
-
-    if (settingsDoc) settings = settingsDoc
-    posts = (postsDocs as any[]).map((p) => ({
-      ...p,
-      _id: String(p._id),
-      publishedAt: p.publishedAt ? new Date(p.publishedAt).toISOString() : null,
+export default function BlogPage() {
+  const posts = [...blogPosts]
+    .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
+    .map((p) => ({
+      _id: p.slug,
+      title: p.title,
+      slug: p.slug,
+      excerpt: p.excerpt,
+      coverImage: p.coverImage,
+      category: p.category,
+      tags: p.tags,
+      author: p.author,
+      publishedAt: p.publishedAt,
     }))
 
-    jsonLd = {
-      '@context': 'https://schema.org',
-      '@type': 'CollectionPage',
-      name: settings?.title || 'Blog',
-      description: settings?.description || 'Nos dernières actualités',
-      url: `${siteConfig.url}/blog`,
-      publisher: {
-        '@type': 'Organization',
-        name: siteConfig.name,
-        url: siteConfig.url,
-      },
-      mainEntity: {
-        '@type': 'ItemList',
-        itemListElement: posts.slice(0, 20).map((post, i) => ({
-          '@type': 'ListItem',
-          position: i + 1,
-          url: `${siteConfig.url}/blog/${post.slug}`,
-          name: post.title,
-        })),
-      },
-    }
-  } catch {
-    // Fallback gracieux : la page rend avec settings par défaut et liste vide
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: blogSettings.title,
+    description: blogSettings.description,
+    url: `${siteConfig.url}/blog`,
+    publisher: {
+      '@type': 'Organization',
+      name: siteConfig.name,
+      url: siteConfig.url,
+    },
+    mainEntity: {
+      '@type': 'ItemList',
+      itemListElement: posts.slice(0, 20).map((post, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        url: `${siteConfig.url}/blog/${post.slug}`,
+        name: post.title,
+      })),
+    },
   }
 
   return (
     <>
-      {jsonLd && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
-      )}
-      <BlogPageContent initialSettings={settings as any} initialPosts={posts as any} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <BlogPageContent initialSettings={blogSettings} initialPosts={posts} />
     </>
   )
 }

@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { useRef } from 'react'
 
 import { CtaSection } from '@/components/sections/cta-section'
+import { MethodSection } from '@/components/sections/method-section'
 import { PremiumHero } from '@/components/sections/premium-hero'
 import { useContent } from '@/hooks/use-content'
 import { getIcon } from '@/lib/icons'
@@ -217,6 +218,9 @@ export function ServicesContent() {
           </div>
         </div>
       </section>
+
+      {/* Bloc Méthode Leadership 3.0 — placé après les services */}
+      <MethodSection />
 
       <CtaSection />
     </>
