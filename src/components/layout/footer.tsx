@@ -1,4 +1,5 @@
 import { ArrowUpRight } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
 
 import { siteConfig } from '@/lib/seo'
@@ -6,7 +7,9 @@ import { siteConfig } from '@/lib/seo'
 const navLinks = [
   { label: 'Accueil', to: '/' },
   { label: 'À propos', to: '/a-propos' },
-  { label: 'Services', to: '/services' },
+  { label: 'Nos services', to: '/services' },
+  { label: 'Secteurs', to: '/secteurs' },
+  { label: 'Candidats', to: '/candidats' },
   { label: 'Contact', to: '/contact' },
 ]
 
@@ -19,7 +22,7 @@ const legalLinks = [
 
 export function Footer() {
   return (
-    <footer className="bg-zinc-950 text-zinc-300">
+    <footer className="bg-[oklch(0.16_0.035_262)] text-zinc-300">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         {/* Top: brand + nav columns */}
         <div className="grid gap-12 py-16 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr] lg:gap-16">
@@ -27,16 +30,16 @@ export function Footer() {
           <div className="space-y-4">
             <Link
               href="/"
-              className="inline-flex items-center gap-2 font-display text-base font-semibold tracking-tight text-white"
+              aria-label="BYS Consulting — Accueil"
+              className="inline-flex"
             >
-              <span className="flex size-7 items-center justify-center rounded-lg bg-white text-zinc-950">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="size-3.5">
-                  <circle cx="12" cy="12" r="10" />
-                  <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
-                  <path d="M2 12h20" />
-                </svg>
-              </span>
-              {siteConfig.name}
+              <Image
+                src="/logo-white.png"
+                alt="BYS Consulting"
+                width={317}
+                height={189}
+                className="h-11 w-auto"
+              />
             </Link>
             <p className="max-w-sm text-sm leading-relaxed text-zinc-400">
               {siteConfig.description}

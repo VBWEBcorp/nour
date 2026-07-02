@@ -63,7 +63,7 @@ export function CandidatesContent() {
                     hidden: { opacity: 0, y: 18 },
                     visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease } },
                   }}
-                  className="group flex flex-col rounded-2xl border border-border/60 bg-card p-6 transition-all hover:border-primary/30 hover:shadow-[0_20px_50px_-20px_oklch(0.55_0.2_285/0.18)]"
+                  className="group flex flex-col rounded-2xl border border-border/60 bg-card p-6 transition-all hover:border-primary/30 hover:shadow-[0_20px_50px_-20px_oklch(0.55_0.2_260/0.18)]"
                 >
                   {/* En-tête : catégorie + icon */}
                   <div className="flex items-center justify-between">
@@ -154,7 +154,7 @@ export function CandidatesContent() {
                     hidden: { opacity: 0, y: 20 },
                     visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease } },
                   }}
-                  className="group rounded-2xl border border-border/60 bg-background p-7 transition-all hover:border-primary/30 hover:shadow-[0_20px_50px_-20px_oklch(0.55_0.2_285/0.18)]"
+                  className="group rounded-2xl border border-border/60 bg-background p-7 transition-all hover:border-primary/30 hover:shadow-[0_20px_50px_-20px_oklch(0.55_0.2_260/0.18)]"
                 >
                   <span className="inline-flex size-11 items-center justify-center rounded-xl bg-gradient-to-br from-primary/15 to-primary/5 text-primary ring-1 ring-primary/20 transition-transform duration-300 group-hover:scale-105">
                     <Icon className="size-5" aria-hidden />
@@ -311,7 +311,7 @@ export function CandidatesContent() {
             <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
               <Link
                 href="/contact"
-                className="group inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground shadow-[0_8px_24px_-8px_oklch(0.48_0.22_285/0.5)] transition-all hover:shadow-[0_12px_32px_-8px_oklch(0.48_0.22_285/0.6)]"
+                className="group inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground shadow-[0_8px_24px_-8px_oklch(0.48_0.22_260/0.5)] transition-all hover:shadow-[0_12px_32px_-8px_oklch(0.48_0.22_260/0.6)]"
               >
                 <span>{cta.button}</span>
                 <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden />

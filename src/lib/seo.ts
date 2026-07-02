@@ -6,7 +6,7 @@ export const siteConfig = {
     "BYS Consulting. Recrutement, Conseil RH & Coaching d'entreprise. Nous accompagnons les entreprises dans le recrutement de leurs fonctions supports et le développement de leurs managers. By Your Side, à chaque étape clé.",
   ogImage: 'https://www.example.com/og.png',
   twitterHandle: '@bysconsulting',
-  themeColor: '#6d28d9',
+  themeColor: '#1d4ed8',
   phone: '+33 6 12 34 56 78',
   email: 'contact@bys-consulting.fr',
   address: {
@@ -36,6 +36,7 @@ export const routes = [
   '/',
   '/a-propos',
   '/services',
+  '/secteurs',
   '/blog',
   '/candidats',
   '/contact',

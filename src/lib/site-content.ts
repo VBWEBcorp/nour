@@ -249,7 +249,7 @@ export const aboutContent = {
           'Méthode Leadership 3.0',
           'Accompagnement de l\'intégration & du onboarding',
         ],
-        linkedIn: 'https://www.linkedin.com/in/nourelhouda-boukhercha/',
+        linkedIn: 'https://www.linkedin.com/in/nourelhouda-boukhercha-651b10151/',
       },
       {
         name: 'Samir Bourebaba',
@@ -262,7 +262,7 @@ export const aboutContent = {
           'Leadership & performance managériale',
           'Gestion du stress, de l\'incertitude et des transitions',
         ],
-        linkedIn: 'https://www.linkedin.com/in/samir-bourebaba/',
+        linkedIn: 'https://www.linkedin.com/in/samir-bourebaba-100217181/',
       },
     ],
   },
@@ -300,17 +300,24 @@ export const servicesContent = {
       "Nous combinons recrutement stratégique et accompagnement humain pour sécuriser vos enjeux clés et faire grandir vos équipes.",
   },
   kpis: [
-    { value: '6', label: 'expertises' },
+    { value: '7', label: 'expertises' },
     { value: '20+', label: "années d'expérience" },
     { value: '100%', label: 'sur-mesure' },
   ],
   list: [
     {
       iconName: 'UserSearch',
-      title: 'Recrutement stratégique',
+      title: 'Recrutement CDI / CDD',
       description: "Chasse de tête sur les fonctions supports (RH, finance, juridique, assistanat, gestion). Méthode Leadership 3.0 alignée sur la culture et la vision de l'entreprise.",
       points: ['Sourcing ciblé & approche directe', 'Évaluation comportementale', 'Garantie période d\'essai'],
       image: images.services[0],
+    },
+    {
+      iconName: 'Waypoints',
+      title: 'Intérim & travail temporaire',
+      description: "Des profils opérationnels immédiatement pour absorber un pic d'activité, remplacer une absence ou sécuriser une transition. Nous gérons le sourcing, l'évaluation et l'administratif de bout en bout.",
+      points: ['Réactivité sous 24-72h', 'Profils qualifiés & évalués', 'Gestion administrative complète'],
+      image: images.services[4],
     },
     {
       iconName: 'Compass',

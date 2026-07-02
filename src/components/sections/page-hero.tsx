@@ -17,7 +17,7 @@ type PageHeroProps = {
 
 export function PageHero({ eyebrow, title, description, image, breadcrumb }: PageHeroProps) {
   return (
-    <section className="relative isolate overflow-hidden">
+    <section className="relative isolate overflow-hidden border-b border-border/60">
       {/* Background image */}
       <div className="absolute inset-0" aria-hidden>
         <Image
@@ -31,12 +31,6 @@ export function PageHero({ eyebrow, title, description, image, breadcrumb }: Pag
         <div className="absolute inset-0 bg-black/55" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20" />
       </div>
-
-      {/* Soft fade-out to page background at bottom */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent to-background sm:h-40"
-      />
 
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         {/* Breadcrumb */}

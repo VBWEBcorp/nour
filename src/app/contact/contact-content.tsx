@@ -35,6 +35,11 @@ export function ContactContent() {
   const postalCode = info.postalCode || siteConfig.address.postalCode
   const city = info.city || siteConfig.address.city
 
+  const fullAddress = `${street}, ${postalCode} ${city}`
+  const mapQuery = encodeURIComponent(fullAddress)
+  const mapEmbedSrc = `https://www.google.com/maps?q=${mapQuery}&hl=fr&z=15&output=embed`
+  const mapLink = `https://www.google.com/maps/search/?api=1&query=${mapQuery}`
+
   return (
     <>
       <PremiumHero
@@ -48,12 +53,12 @@ export function ContactContent() {
         {/* Trust row */}
         <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-sm text-white/80">
           <div className="flex items-center gap-2">
-            <Clock className="size-4 text-[oklch(0.78_0.15_285)]" aria-hidden />
+            <Clock className="size-4 text-[oklch(0.78_0.15_260)]" aria-hidden />
             <span>Réponse sous 24h</span>
           </div>
           <span className="hidden h-1 w-1 rounded-full bg-white/40 sm:inline" aria-hidden />
           <div className="flex items-center gap-2">
-            <Send className="size-4 text-[oklch(0.78_0.15_285)]" aria-hidden />
+            <Send className="size-4 text-[oklch(0.78_0.15_260)]" aria-hidden />
             <span>Devis gratuit</span>
           </div>
           <span className="hidden h-1 w-1 rounded-full bg-white/40 sm:inline" aria-hidden />
@@ -81,7 +86,7 @@ export function ContactContent() {
                   aria-hidden
                   style={{
                     background:
-                      'linear-gradient(135deg, oklch(0.55 0.2 285 / 0.4) 0%, oklch(0.91 0.012 264 / 0.55) 50%, oklch(0.55 0.2 285 / 0.4) 100%)',
+                      'linear-gradient(135deg, oklch(0.55 0.2 260 / 0.4) 0%, oklch(0.91 0.012 264 / 0.55) 50%, oklch(0.55 0.2 260 / 0.4) 100%)',
                     WebkitMask:
                       'linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)',
                     WebkitMaskComposite: 'xor',
@@ -113,7 +118,7 @@ export function ContactContent() {
                           name="firstname"
                           placeholder="Jean"
                           autoComplete="given-name"
-                          className="h-11 rounded-xl bg-background/70 transition-shadow focus-visible:shadow-[0_0_0_4px_oklch(0.55_0.2_285/0.1)]"
+                          className="h-11 rounded-xl bg-background/70 transition-shadow focus-visible:shadow-[0_0_0_4px_oklch(0.55_0.2_260/0.1)]"
                         />
                       </div>
                       <div className="space-y-2">
@@ -123,7 +128,7 @@ export function ContactContent() {
                           name="lastname"
                           placeholder="Dupont"
                           autoComplete="family-name"
-                          className="h-11 rounded-xl bg-background/70 transition-shadow focus-visible:shadow-[0_0_0_4px_oklch(0.55_0.2_285/0.1)]"
+                          className="h-11 rounded-xl bg-background/70 transition-shadow focus-visible:shadow-[0_0_0_4px_oklch(0.55_0.2_260/0.1)]"
                         />
                       </div>
                     </div>
@@ -135,7 +140,7 @@ export function ContactContent() {
                         type="email"
                         placeholder="jean@entreprise.fr"
                         autoComplete="email"
-                        className="h-11 rounded-xl bg-background/70 transition-shadow focus-visible:shadow-[0_0_0_4px_oklch(0.55_0.2_285/0.1)]"
+                        className="h-11 rounded-xl bg-background/70 transition-shadow focus-visible:shadow-[0_0_0_4px_oklch(0.55_0.2_260/0.1)]"
                       />
                     </div>
                     <div className="space-y-2">
@@ -148,7 +153,7 @@ export function ContactContent() {
                         type="tel"
                         placeholder="06 12 34 56 78"
                         autoComplete="tel"
-                        className="h-11 rounded-xl bg-background/70 transition-shadow focus-visible:shadow-[0_0_0_4px_oklch(0.55_0.2_285/0.1)]"
+                        className="h-11 rounded-xl bg-background/70 transition-shadow focus-visible:shadow-[0_0_0_4px_oklch(0.55_0.2_260/0.1)]"
                       />
                     </div>
                     <div className="space-y-2">
@@ -158,7 +163,7 @@ export function ContactContent() {
                         name="message"
                         rows={5}
                         placeholder="Décrivez votre projet en quelques mots..."
-                        className="w-full rounded-xl border border-input bg-background/70 px-3.5 py-3 text-sm leading-relaxed text-foreground transition-shadow placeholder:text-muted-foreground focus-visible:border-ring focus-visible:shadow-[0_0_0_4px_oklch(0.55_0.2_285/0.1)] focus-visible:outline-none"
+                        className="w-full rounded-xl border border-input bg-background/70 px-3.5 py-3 text-sm leading-relaxed text-foreground transition-shadow placeholder:text-muted-foreground focus-visible:border-ring focus-visible:shadow-[0_0_0_4px_oklch(0.55_0.2_260/0.1)] focus-visible:outline-none"
                       />
                     </div>
                     <Button type="submit" size="lg" className="w-full group">
@@ -185,7 +190,7 @@ export function ContactContent() {
                   aria-hidden
                   style={{
                     background:
-                      'linear-gradient(135deg, oklch(0.55 0.2 285 / 0.35) 0%, oklch(0.91 0.012 264 / 0.55) 50%, oklch(0.55 0.2 285 / 0.35) 100%)',
+                      'linear-gradient(135deg, oklch(0.55 0.2 260 / 0.35) 0%, oklch(0.91 0.012 264 / 0.55) 50%, oklch(0.55 0.2 260 / 0.35) 100%)',
                     WebkitMask:
                       'linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)',
                     WebkitMaskComposite: 'xor',
@@ -256,41 +261,40 @@ export function ContactContent() {
                 </div>
               </div>
 
-              {/* Map placeholder amélioré */}
-              <div className="relative overflow-hidden rounded-3xl bg-muted/50 shadow-[0_10px_30px_-12px_oklch(0.2_0.02_264/0.18)] backdrop-blur-sm">
+              {/* Carte Google Maps */}
+              <div className="group relative overflow-hidden rounded-3xl shadow-[0_10px_30px_-12px_oklch(0.2_0.02_264/0.18)]">
                 <div
-                  className="pointer-events-none absolute inset-0 rounded-3xl p-px"
+                  className="pointer-events-none absolute inset-0 z-10 rounded-3xl p-px"
                   aria-hidden
                   style={{
                     background:
-                      'linear-gradient(135deg, oklch(0.55 0.2 285 / 0.3) 0%, oklch(0.91 0.012 264 / 0.5) 50%, oklch(0.55 0.2 285 / 0.3) 100%)',
+                      'linear-gradient(135deg, oklch(0.55 0.2 260 / 0.3) 0%, oklch(0.91 0.012 264 / 0.5) 50%, oklch(0.55 0.2 260 / 0.3) 100%)',
                     WebkitMask:
                       'linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)',
                     WebkitMaskComposite: 'xor',
                     maskComposite: 'exclude',
                   }}
                 />
-                {/* Dot grid décoratif */}
-                <div
-                  className="pointer-events-none absolute inset-0 opacity-40"
-                  aria-hidden
-                  style={{
-                    backgroundImage:
-                      'radial-gradient(oklch(0.55 0.05 264 / 0.2) 1px, transparent 1px)',
-                    backgroundSize: '24px 24px',
-                  }}
+
+                <iframe
+                  title={`Localisation BYS Consulting — ${fullAddress}`}
+                  src={mapEmbedSrc}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  allowFullScreen
+                  className="block h-64 w-full border-0 grayscale-[0.2] transition-all duration-500 group-hover:grayscale-0"
                 />
-                <div className="relative flex h-56 flex-col items-center justify-center gap-3 p-6 text-center">
-                  <span className="flex size-12 items-center justify-center rounded-2xl bg-background/70 text-primary ring-1 ring-border/60 backdrop-blur-sm">
-                    <MapPin className="size-5" aria-hidden />
-                  </span>
-                  <p className="text-sm font-medium text-foreground">
-                    Intégrez ici votre carte Google Maps
-                  </p>
-                  <p className="text-xs text-muted-foreground">
-                    iframe ou API Google Maps
-                  </p>
-                </div>
+
+                {/* Lien overlay vers Google Maps */}
+                <a
+                  href={mapLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="absolute bottom-3 right-3 z-20 inline-flex items-center gap-1.5 rounded-full bg-background/90 px-3 py-1.5 text-xs font-semibold text-foreground shadow-sm ring-1 ring-border/60 backdrop-blur-sm transition-colors hover:text-primary"
+                >
+                  <MapPin className="size-3.5 text-primary" aria-hidden />
+                  Ouvrir dans Google Maps
+                </a>
               </div>
             </motion.div>
           </div>

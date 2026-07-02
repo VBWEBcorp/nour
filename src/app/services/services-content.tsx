@@ -76,19 +76,6 @@ function ServiceRow({
           className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-black/10 via-transparent to-transparent"
           aria-hidden
         />
-
-        {/* Numéro 0X flottant + fade scroll */}
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.35 }}
-          transition={{ duration: 0.5, delay: 0.25, ease }}
-          className="absolute left-5 top-5 flex items-center gap-2"
-        >
-          <span className="rounded-full bg-background/90 px-3 py-1 font-display text-[11px] font-bold tracking-[0.18em] text-foreground backdrop-blur-sm">
-            0{index + 1}
-          </span>
-        </motion.div>
       </motion.div>
 
       {/* Texte — slide opposé + stagger interne sur les enfants */}

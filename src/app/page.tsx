@@ -1,15 +1,14 @@
 import type { Metadata } from 'next'
 
-import { CandidatesBand } from '@/components/sections/candidates-band'
-import { CtaSection } from '@/components/sections/cta-section'
-import { FaqSection } from '@/components/sections/faq-section'
-import { GalleryCarousel } from '@/components/sections/gallery-carousel'
-import { HeroSection } from '@/components/sections/hero-section'
+import { BysHero } from '@/components/home/bys-hero'
+import { Convictions } from '@/components/home/convictions'
+import { HomeCta } from '@/components/home/home-cta'
+import { NeedsBlocks } from '@/components/home/needs-blocks'
+import { ProcessTimeline } from '@/components/home/process-timeline'
+import { WhyBys } from '@/components/home/why-bys'
 import { MethodSection } from '@/components/sections/method-section'
-import { ServicesPreview } from '@/components/sections/services-preview'
-import { StorySection } from '@/components/sections/story-section'
 import { TestimonialsSection } from '@/components/sections/testimonials-section'
-import { ValuesMarquee } from '@/components/sections/values-marquee'
+import { FaqSection } from '@/components/sections/faq-section'
 import {
   localBusinessJsonLd,
   organizationJsonLd,
@@ -39,16 +38,15 @@ export default function HomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <HeroSection />
-      <ServicesPreview />
-      <StorySection />
+      <BysHero />
+      <NeedsBlocks />
+      <WhyBys />
+      <Convictions />
       <MethodSection />
+      <ProcessTimeline />
       <TestimonialsSection />
-      <GalleryCarousel />
       <FaqSection />
-      <CtaSection />
-      <CandidatesBand />
-      <ValuesMarquee />
+      <HomeCta />
     </>
   )
 }
