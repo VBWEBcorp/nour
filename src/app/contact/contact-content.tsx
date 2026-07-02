@@ -1,7 +1,8 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Clock, Mail, MapPin, Phone, Send } from 'lucide-react'
+import { CheckCircle2, Clock, Mail, MapPin, Phone, Send } from 'lucide-react'
+import { useState } from 'react'
 
 import { PremiumHero } from '@/components/sections/premium-hero'
 import { Button } from '@/components/ui/button'
@@ -28,6 +29,44 @@ export function ContactContent() {
   const { data } = useContent('contact', defaults)
   const hero = data.hero ?? defaults.hero
   const info = data.info ?? defaults.info
+
+  const [submitting, setSubmitting] = useState(false)
+  const [sent, setSent] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    const form = e.currentTarget
+    const fd = new FormData(form)
+    const payload = {
+      firstname: String(fd.get('firstname') || ''),
+      lastname: String(fd.get('lastname') || ''),
+      email: String(fd.get('email') || ''),
+      phone: String(fd.get('phone') || ''),
+      message: String(fd.get('message') || ''),
+      hp: String(fd.get('hp') || ''), // honeypot
+    }
+
+    setSubmitting(true)
+    setError(null)
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+      if (!res.ok) {
+        const d = await res.json().catch(() => ({}))
+        throw new Error(d?.error || 'Envoi impossible.')
+      }
+      setSent(true)
+      form.reset()
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Envoi impossible.')
+    } finally {
+      setSubmitting(false)
+    }
+  }
 
   const phone = info.phone || siteConfig.phone
   const email = info.email || siteConfig.email
@@ -106,71 +145,110 @@ export function ContactContent() {
                     </div>
                   </div>
 
-                  <form
-                    className="mt-7 space-y-5"
-                    onSubmit={(e) => e.preventDefault()}
-                  >
-                    <div className="grid gap-5 sm:grid-cols-2">
+                  {sent ? (
+                    <div className="mt-7 py-8 text-center">
+                      <span className="mx-auto flex size-14 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                        <CheckCircle2 className="size-7" aria-hidden />
+                      </span>
+                      <h3 className="mt-5 font-display text-lg font-semibold text-foreground">
+                        Message envoyé&nbsp;!
+                      </h3>
+                      <p className="mx-auto mt-2 max-w-xs text-sm text-muted-foreground">
+                        Merci, nous avons bien reçu votre message et revenons vers vous sous 24h.
+                      </p>
+                      <Button
+                        type="button"
+                        variant="outline"
+                        className="mt-6"
+                        onClick={() => setSent(false)}
+                      >
+                        Envoyer un autre message
+                      </Button>
+                    </div>
+                  ) : (
+                    <form className="mt-7 space-y-5" onSubmit={handleSubmit}>
+                      {/* Honeypot anti-spam : masqué aux humains */}
+                      <input
+                        type="text"
+                        name="hp"
+                        tabIndex={-1}
+                        autoComplete="off"
+                        aria-hidden="true"
+                        className="absolute left-[-9999px] h-0 w-0 opacity-0"
+                      />
+                      <div className="grid gap-5 sm:grid-cols-2">
+                        <div className="space-y-2">
+                          <Label htmlFor="firstname">Prénom</Label>
+                          <Input
+                            id="firstname"
+                            name="firstname"
+                            placeholder="Jean"
+                            autoComplete="given-name"
+                            required
+                            className="h-11 rounded-xl bg-background/70 transition-shadow focus-visible:shadow-[0_0_0_4px_oklch(0.55_0.2_260/0.1)]"
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="lastname">Nom</Label>
+                          <Input
+                            id="lastname"
+                            name="lastname"
+                            placeholder="Dupont"
+                            autoComplete="family-name"
+                            required
+                            className="h-11 rounded-xl bg-background/70 transition-shadow focus-visible:shadow-[0_0_0_4px_oklch(0.55_0.2_260/0.1)]"
+                          />
+                        </div>
+                      </div>
                       <div className="space-y-2">
-                        <Label htmlFor="firstname">Prénom</Label>
+                        <Label htmlFor="email">Email</Label>
                         <Input
-                          id="firstname"
-                          name="firstname"
-                          placeholder="Jean"
-                          autoComplete="given-name"
+                          id="email"
+                          name="email"
+                          type="email"
+                          placeholder="jean@entreprise.fr"
+                          autoComplete="email"
+                          required
                           className="h-11 rounded-xl bg-background/70 transition-shadow focus-visible:shadow-[0_0_0_4px_oklch(0.55_0.2_260/0.1)]"
                         />
                       </div>
                       <div className="space-y-2">
-                        <Label htmlFor="lastname">Nom</Label>
+                        <Label htmlFor="phone">
+                          Téléphone <span className="font-normal text-muted-foreground">(optionnel)</span>
+                        </Label>
                         <Input
-                          id="lastname"
-                          name="lastname"
-                          placeholder="Dupont"
-                          autoComplete="family-name"
+                          id="phone"
+                          name="phone"
+                          type="tel"
+                          placeholder="06 12 34 56 78"
+                          autoComplete="tel"
                           className="h-11 rounded-xl bg-background/70 transition-shadow focus-visible:shadow-[0_0_0_4px_oklch(0.55_0.2_260/0.1)]"
                         />
                       </div>
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="email">Email</Label>
-                      <Input
-                        id="email"
-                        name="email"
-                        type="email"
-                        placeholder="jean@entreprise.fr"
-                        autoComplete="email"
-                        className="h-11 rounded-xl bg-background/70 transition-shadow focus-visible:shadow-[0_0_0_4px_oklch(0.55_0.2_260/0.1)]"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="phone">
-                        Téléphone <span className="font-normal text-muted-foreground">(optionnel)</span>
-                      </Label>
-                      <Input
-                        id="phone"
-                        name="phone"
-                        type="tel"
-                        placeholder="06 12 34 56 78"
-                        autoComplete="tel"
-                        className="h-11 rounded-xl bg-background/70 transition-shadow focus-visible:shadow-[0_0_0_4px_oklch(0.55_0.2_260/0.1)]"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="message">Votre message</Label>
-                      <textarea
-                        id="message"
-                        name="message"
-                        rows={5}
-                        placeholder="Décrivez votre projet en quelques mots..."
-                        className="w-full rounded-xl border border-input bg-background/70 px-3.5 py-3 text-sm leading-relaxed text-foreground transition-shadow placeholder:text-muted-foreground focus-visible:border-ring focus-visible:shadow-[0_0_0_4px_oklch(0.55_0.2_260/0.1)] focus-visible:outline-none"
-                      />
-                    </div>
-                    <Button type="submit" size="lg" className="w-full group">
-                      Envoyer le message
-                      <Send className="size-4 transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden />
-                    </Button>
-                  </form>
+                      <div className="space-y-2">
+                        <Label htmlFor="message">Votre message</Label>
+                        <textarea
+                          id="message"
+                          name="message"
+                          rows={5}
+                          required
+                          placeholder="Décrivez votre projet en quelques mots..."
+                          className="w-full rounded-xl border border-input bg-background/70 px-3.5 py-3 text-sm leading-relaxed text-foreground transition-shadow placeholder:text-muted-foreground focus-visible:border-ring focus-visible:shadow-[0_0_0_4px_oklch(0.55_0.2_260/0.1)] focus-visible:outline-none"
+                        />
+                      </div>
+                      {error && (
+                        <p className="rounded-lg bg-red-500/10 px-3 py-2 text-center text-sm font-medium text-red-600">
+                          {error}
+                        </p>
+                      )}
+                      <Button type="submit" size="lg" disabled={submitting} className="w-full group">
+                        {submitting ? 'Envoi en cours…' : 'Envoyer le message'}
+                        {!submitting && (
+                          <Send className="size-4 transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden />
+                        )}
+                      </Button>
+                    </form>
+                  )}
                 </div>
               </div>
             </motion.div>
