@@ -18,7 +18,6 @@ interface NavLink {
 const defaultLinks: NavLink[] = [
   { to: '/', label: 'Accueil' },
   { to: '/a-propos', label: 'À propos' },
-  { to: '/services', label: 'Nos services' },
   { to: '/secteurs', label: 'Secteurs' },
   { to: '/candidats', label: 'Candidats' },
 ]

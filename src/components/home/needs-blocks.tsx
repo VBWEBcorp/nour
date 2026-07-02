@@ -11,7 +11,7 @@ import { getIcon } from '@/lib/icons'
 import { needs } from '@/lib/bys-content'
 import { cn } from '@/lib/utils'
 
-const links = ['/services', '/services', '/candidats'] as const
+const links = ['/a-propos', '/a-propos', '/candidats'] as const
 
 function NeedRow({
   need,

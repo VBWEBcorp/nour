@@ -32,6 +32,10 @@ export const images = {
   servicesHero:
     'https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?auto=format&fit=crop&w=1920&q=80',
 
+  // Page Secteurs — image de fond du hero
+  sectorsHero:
+    'https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1920&q=80',
+
   // Page Contact — image de fond du hero
   contactHero:
     'https://images.unsplash.com/photo-1423666639041-f56000c27a9a?auto=format&fit=crop&w=1920&q=80',

@@ -1,17 +1,262 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { ArrowRight, MapPin } from 'lucide-react'
+import { AnimatePresence, motion } from 'framer-motion'
+import { ArrowRight, CheckCircle2, MapPin, Paperclip, Send, Upload, X } from 'lucide-react'
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
 
 import { PageHero } from '@/components/sections/page-hero'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
 import { getIcon } from '@/lib/icons'
 import { candidatesContent } from '@/lib/site-content'
+import { cn } from '@/lib/utils'
 
 const ease = [0.22, 1, 0.36, 1] as const
 
+type Offer = (typeof candidatesContent.offers.items)[number]
+
+/* ------------------------------------------------------------------ */
+/*  Modale de candidature (formulaire + upload CV / lettre)           */
+/* ------------------------------------------------------------------ */
+function ApplicationModal({
+  offer,
+  onClose,
+}: {
+  offer: Offer | null
+  onClose: () => void
+}) {
+  const [cvName, setCvName] = useState<string | null>(null)
+  const [lmName, setLmName] = useState<string | null>(null)
+  const [sent, setSent] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    if (!offer) {
+      document.body.style.overflow = ''
+      return
+    }
+    setSent(false)
+    setSubmitting(false)
+    setError(null)
+    setCvName(null)
+    setLmName(null)
+    document.body.style.overflow = 'hidden'
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose()
+    }
+    window.addEventListener('keydown', onKey)
+    return () => {
+      window.removeEventListener('keydown', onKey)
+      document.body.style.overflow = ''
+    }
+  }, [offer, onClose])
+
+  return (
+    <AnimatePresence>
+      {offer && (
+        <motion.div
+          key="backdrop"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
+          onClick={onClose}
+          className="fixed inset-0 z-[60] flex items-start justify-center overflow-y-auto bg-black/60 p-4 backdrop-blur-sm"
+          role="dialog"
+          aria-modal="true"
+          aria-label={`Postuler : ${offer.title}`}
+        >
+          <motion.div
+            key="panel"
+            initial={{ opacity: 0, y: 20, scale: 0.97 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.97 }}
+            transition={{ duration: 0.28, ease }}
+            onClick={(e) => e.stopPropagation()}
+            className="relative my-8 w-full max-w-lg rounded-3xl bg-card p-6 shadow-[0_40px_100px_-20px_oklch(0.2_0.02_264/0.5)] sm:p-8"
+          >
+            <button
+              type="button"
+              onClick={onClose}
+              aria-label="Fermer"
+              className="absolute right-4 top-4 inline-flex size-9 items-center justify-center rounded-xl text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+            >
+              <X className="size-5" aria-hidden />
+            </button>
+
+            {sent ? (
+              <div className="py-8 text-center">
+                <span className="mx-auto flex size-14 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                  <CheckCircle2 className="size-7" aria-hidden />
+                </span>
+                <h2 className="mt-5 font-display text-xl font-semibold text-foreground">
+                  Candidature envoyée&nbsp;!
+                </h2>
+                <p className="mx-auto mt-2 max-w-xs text-sm text-muted-foreground">
+                  Merci, nous avons bien reçu votre candidature pour{' '}
+                  <span className="font-medium text-foreground">{offer.title}</span>.
+                  Nous revenons vers vous rapidement.
+                </p>
+                <Button onClick={onClose} className="mt-6">
+                  Fermer
+                </Button>
+              </div>
+            ) : (
+              <>
+                <div className="pr-8">
+                  <p className="font-display text-[11px] font-semibold uppercase tracking-[0.18em] text-primary">
+                    Postuler
+                  </p>
+                  <h2 className="mt-1.5 font-display text-xl font-semibold tracking-tight text-foreground">
+                    {offer.title}
+                  </h2>
+                  <p className="mt-0.5 text-sm text-muted-foreground">{offer.company}</p>
+                </div>
+
+                <form
+                  className="mt-6 space-y-4"
+                  onSubmit={async (e) => {
+                    e.preventDefault()
+                    if (!offer) return
+                    const fd = new FormData(e.currentTarget)
+                    fd.append('offerTitle', offer.title)
+                    fd.append('offerCompany', offer.company ?? '')
+                    setSubmitting(true)
+                    setError(null)
+                    try {
+                      const res = await fetch('/api/applications', {
+                        method: 'POST',
+                        body: fd,
+                      })
+                      if (!res.ok) {
+                        const data = await res.json().catch(() => ({}))
+                        throw new Error(data?.error || 'Envoi impossible.')
+                      }
+                      setSent(true)
+                    } catch (err) {
+                      setError(err instanceof Error ? err.message : 'Envoi impossible.')
+                    } finally {
+                      setSubmitting(false)
+                    }
+                  }}
+                >
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    <div className="space-y-2">
+                      <Label htmlFor="app-firstname">Prénom</Label>
+                      <Input id="app-firstname" name="firstname" placeholder="Jean" autoComplete="given-name" required className="h-11 rounded-xl bg-background/70" />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="app-lastname">Nom</Label>
+                      <Input id="app-lastname" name="lastname" placeholder="Dupont" autoComplete="family-name" required className="h-11 rounded-xl bg-background/70" />
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="app-email">Email</Label>
+                    <Input id="app-email" name="email" type="email" placeholder="jean@email.fr" autoComplete="email" required className="h-11 rounded-xl bg-background/70" />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="app-phone">
+                      Téléphone <span className="font-normal text-muted-foreground">(optionnel)</span>
+                    </Label>
+                    <Input id="app-phone" name="phone" type="tel" placeholder="06 12 34 56 78" autoComplete="tel" className="h-11 rounded-xl bg-background/70" />
+                  </div>
+
+                  {/* CV (requis) */}
+                  <div className="space-y-2">
+                    <Label htmlFor="app-cv">CV</Label>
+                    <label
+                      htmlFor="app-cv"
+                      className="flex cursor-pointer items-center gap-3 rounded-xl border border-dashed border-input bg-background/60 px-4 py-3 transition-colors hover:border-primary/50 hover:bg-primary/[0.03]"
+                    >
+                      <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                        <Upload className="size-4" aria-hidden />
+                      </span>
+                      <span className={cn('min-w-0 flex-1 truncate text-sm', cvName ? 'font-medium text-foreground' : 'text-muted-foreground')}>
+                        {cvName || 'Déposer votre CV · PDF ou DOC'}
+                      </span>
+                      <input
+                        id="app-cv"
+                        name="cv"
+                        type="file"
+                        required
+                        accept=".pdf,.doc,.docx"
+                        className="sr-only"
+                        onChange={(e) => setCvName(e.target.files?.[0]?.name ?? null)}
+                      />
+                    </label>
+                  </div>
+
+                  {/* Lettre de motivation (optionnel) */}
+                  <div className="space-y-2">
+                    <Label htmlFor="app-lm">
+                      Lettre de motivation <span className="font-normal text-muted-foreground">(optionnel)</span>
+                    </Label>
+                    <label
+                      htmlFor="app-lm"
+                      className="flex cursor-pointer items-center gap-3 rounded-xl border border-dashed border-input bg-background/60 px-4 py-3 transition-colors hover:border-primary/50 hover:bg-primary/[0.03]"
+                    >
+                      <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                        <Paperclip className="size-4" aria-hidden />
+                      </span>
+                      <span className={cn('min-w-0 flex-1 truncate text-sm', lmName ? 'font-medium text-foreground' : 'text-muted-foreground')}>
+                        {lmName || 'Ajouter une lettre · PDF ou DOC'}
+                      </span>
+                      <input
+                        id="app-lm"
+                        name="lettre"
+                        type="file"
+                        accept=".pdf,.doc,.docx"
+                        className="sr-only"
+                        onChange={(e) => setLmName(e.target.files?.[0]?.name ?? null)}
+                      />
+                    </label>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="app-msg">
+                      Message <span className="font-normal text-muted-foreground">(optionnel)</span>
+                    </Label>
+                    <textarea
+                      id="app-msg"
+                      name="message"
+                      rows={3}
+                      placeholder="Un mot sur votre motivation..."
+                      className="w-full rounded-xl border border-input bg-background/70 px-3.5 py-3 text-sm leading-relaxed text-foreground transition-shadow placeholder:text-muted-foreground focus-visible:border-ring focus-visible:outline-none"
+                    />
+                  </div>
+
+                  {error && (
+                    <p className="rounded-lg bg-red-500/10 px-3 py-2 text-center text-sm font-medium text-red-600">
+                      {error}
+                    </p>
+                  )}
+                  <Button type="submit" size="lg" disabled={submitting} className="group w-full">
+                    {submitting ? 'Envoi en cours…' : 'Envoyer ma candidature'}
+                    {!submitting && (
+                      <Send className="size-4 transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden />
+                    )}
+                  </Button>
+                  <p className="text-center text-xs text-muted-foreground">
+                    Vos fichiers restent confidentiels et ne servent qu&apos;à votre candidature.
+                  </p>
+                </form>
+              </>
+            )}
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  )
+}
+
 export function CandidatesContent() {
   const { hero, offers, approach, jobs, process, cta } = candidatesContent
+  const [activeOffer, setActiveOffer] = useState<Offer | null>(null)
 
   return (
     <>
@@ -100,13 +345,14 @@ export function CandidatesContent() {
 
                   {/* Bouton Postuler — pousse en bas de la carte */}
                   <div className="mt-6 flex-1" />
-                  <Link
-                    href="/contact"
+                  <button
+                    type="button"
+                    onClick={() => setActiveOffer(offer)}
                     className="group/btn mt-4 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-foreground px-4 py-2.5 text-sm font-semibold text-background transition-all hover:bg-primary"
                   >
                     <span>Postuler à cette offre</span>
                     <ArrowRight className="size-4 transition-transform duration-300 group-hover/btn:translate-x-0.5" aria-hidden />
-                  </Link>
+                  </button>
                 </motion.article>
               )
             })}
@@ -320,6 +566,8 @@ export function CandidatesContent() {
           </motion.div>
         </div>
       </section>
+
+      <ApplicationModal offer={activeOffer} onClose={() => setActiveOffer(null)} />
     </>
   )
 }

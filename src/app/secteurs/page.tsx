@@ -39,7 +39,7 @@ export default function SecteursPage() {
         eyebrow="Secteurs & métiers"
         title="Une expertise transverse sur vos fonctions supports"
         description="Des métiers techniques aux fonctions stratégiques, nous couvrons l'ensemble des expertises qui font tourner et grandir votre organisation."
-        image={images.servicesHero}
+        image={images.sectorsHero}
         breadcrumb="Secteurs"
       />
 

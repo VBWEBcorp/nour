@@ -10,12 +10,6 @@ import { images } from '@/lib/site-content'
 
 const ease = [0.22, 1, 0.36, 1] as const
 
-const stats = [
-  { value: '20+', label: "ans d'expérience cumulée" },
-  { value: '4-8 sem', label: 'délai moyen de recrutement' },
-  { value: '98%', label: 'recrutements pérennes' },
-]
-
 export function BysHero() {
   return (
     <section className="relative isolate overflow-hidden bg-[oklch(0.15_0.03_262)] text-white">
@@ -146,35 +140,16 @@ export function BysHero() {
             <span>Prendre rendez-vous</span>
           </Link>
           <Link
-            href="/services"
+            href="/a-propos"
             className="group/sec inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/[0.04] px-6 text-sm font-medium text-white backdrop-blur-sm transition-colors hover:bg-white/10 sm:w-auto"
           >
-            <span>Découvrir nos services</span>
+            <span>Découvrir nos métiers</span>
             <ArrowRight
               className="size-4 transition-transform duration-300 group-hover/sec:translate-x-0.5"
               aria-hidden
             />
           </Link>
         </motion.div>
-
-        {/* Stats de confiance */}
-        <motion.dl
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease, delay: 0.5 }}
-          className="mx-auto mt-16 grid max-w-2xl grid-cols-3 gap-4 border-t border-white/10 pt-8"
-        >
-          {stats.map((s) => (
-            <div key={s.label} className="text-center">
-              <dt className="font-display text-2xl font-semibold tracking-tight text-white sm:text-3xl">
-                {s.value}
-              </dt>
-              <dd className="mt-1 text-[11px] leading-tight text-white/55 sm:text-xs">
-                {s.label}
-              </dd>
-            </div>
-          ))}
-        </motion.dl>
       </div>
 
       {/* Bandeau de mots */}

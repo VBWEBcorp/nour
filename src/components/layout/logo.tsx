@@ -23,7 +23,7 @@ export function Logo({ className }: LogoProps) {
         width={317}
         height={189}
         priority
-        className="h-10 w-auto transition-transform duration-300 group-hover:scale-[1.04]"
+        className="h-12 w-auto transition-transform duration-300 group-hover:scale-[1.04]"
       />
     </Link>
   )

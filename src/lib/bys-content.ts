@@ -264,8 +264,12 @@ export const offers = [
 export const editorial = [
   {
     key: 'recruter',
+    iconName: 'UserSearch',
     kicker: 'Le recrutement',
     verb: 'Recruter',
+    summary:
+      "Sourcer, qualifier, accompagner jusqu'à la signature. Et lire, derrière un CV, le talent qu'il ne dit pas encore.",
+    punch: "Un CV, c'est une page. Un talent, c'est une histoire.",
     definition: [
       "Amener quelqu'un à entrer dans un parti, un groupe, une société.",
       'Engager des gens pour tenir certains emplois.',
@@ -285,8 +289,12 @@ export const editorial = [
   },
   {
     key: 'coacher',
-    kicker: 'Le coaching · Leadership / Management 3.0',
+    iconName: 'Compass',
+    kicker: 'Coaching · Leadership 3.0',
     verb: 'Coacher',
+    summary:
+      "Poser les bonnes questions plutôt que donner des réponses. Révéler et faire grandir dirigeants, managers et équipes.",
+    punch: "Ce n'est pas former. C'est transformer.",
     definition: [
       'Entraîner une équipe sportive, préparer un athlète à la compétition.',
       "Conseiller et guider quelqu'un pour l'aider à progresser dans sa vie professionnelle ou personnelle.",
@@ -307,8 +315,12 @@ export const editorial = [
   },
   {
     key: 'interim',
+    iconName: 'Waypoints',
     kicker: "L'intérim",
     verb: 'Intérim',
+    summary:
+      "Le bon profil au bon moment, même quand ce moment est court. Tenir une position, avec la même exigence que le long terme.",
+    punch: 'Le provisoire bien géré change tout.',
     definition: [
       "Intervalle de temps pendant lequel une fonction est exercée par une personne autre que le titulaire.",
       "Situation d'une personne qui travaille pour une entreprise de travail temporaire.",
@@ -338,12 +350,9 @@ export const pitchCroise = {
   eyebrow: 'Recrutement × Coaching',
   title: "Recruter, c'est bien. Fidéliser, c'est mieux.",
   paragraphs: [
-    "Le succès d'un recrutement se mesure souvent à la signature du contrat. La bonne personne, au bon poste, au bon moment. Mission accomplie.",
-    "Mais la vraie question n'est pas : avez-vous recruté le bon profil ? Elle est : est-il encore là dans 6 mois ?",
-    "Car ce que les chiffres disent, et que les entreprises savent trop bien, c'est qu'un recrutement raté coûte cher. En temps. En énergie. En désorganisation. Et surtout, en opportunités perdues.",
-    "Et un recrutement raté, ce n'est pas toujours le mauvais candidat. C'est parfois le bon candidat, mal accueilli, mal accompagné, mal intégré. Un talent qui part non pas parce qu'il n'était pas à sa place, mais parce qu'on ne l'a pas aidé à la trouver.",
-    "La période d'essai est le moment le plus fragile d'un recrutement. C'est là que tout se joue vraiment. Le candidat observe, doute, se compare à ses attentes. Le manager juge, s'impatiente, ne comprend pas toujours ce qu'il voit. Et entre les deux, il y a un fossé que personne ne pense à combler.",
-    "C'est précisément là qu'intervient le coaching. Pas comme un aveu d'échec. Pas comme un outil de remédiation. Mais comme le prolongement naturel d'un recrutement bien pensé.",
+    "La bonne personne, au bon poste, au bon moment : un recrutement semble réussi à la signature. Mais la vraie question, c'est : est-il encore là dans 6 mois ?",
+    "Un recrutement raté, ce n'est pas toujours le mauvais candidat. C'est parfois le bon, mal accueilli, mal accompagné, mal intégré.",
+    "C'est là qu'intervient le coaching : le prolongement naturel d'un recrutement bien pensé.",
   ],
   actions: [
     'Accompagner le nouveau collaborateur dans sa prise de poste.',

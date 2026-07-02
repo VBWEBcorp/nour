@@ -35,7 +35,6 @@ export function buildTitle(page?: string) {
 export const routes = [
   '/',
   '/a-propos',
-  '/services',
   '/secteurs',
   '/blog',
   '/candidats',
