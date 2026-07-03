@@ -83,11 +83,12 @@ export function BysHero() {
           transition={{ duration: 0.7, ease, delay: 0.12 }}
           className="mt-8"
         >
-          <span className="block font-display text-7xl font-bold leading-none tracking-[0.08em] text-white sm:text-8xl lg:text-[9.5rem]">
-            BYS
-          </span>
-          <span className="mt-3 block font-serif text-2xl italic text-[oklch(0.82_0.13_260)] sm:text-3xl lg:text-4xl">
-            By Your Side
+          {/* Initiales BYS en majuscule + les autres lettres à côté → « By Your Side »
+              Serif italique éditorial (Instrument Serif) pour un rendu premium. */}
+          <span className="block font-serif text-6xl italic leading-[0.95] tracking-[0.01em] text-white sm:text-7xl lg:text-9xl">
+            <span className="text-7xl uppercase not-italic sm:text-8xl lg:text-[10rem]">B</span>y{' '}
+            <span className="text-7xl uppercase not-italic sm:text-8xl lg:text-[10rem]">Y</span>our{' '}
+            <span className="text-7xl uppercase not-italic sm:text-8xl lg:text-[10rem]">S</span>ide
           </span>
         </motion.h1>
 
