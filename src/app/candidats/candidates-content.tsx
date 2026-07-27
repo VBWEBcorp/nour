@@ -5,11 +5,15 @@ import { ArrowRight, CheckCircle2, MapPin, Paperclip, Send, Upload, X } from 'lu
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
+import { JobFamilies } from '@/components/sections/job-families'
+import { NicokaJobs } from '@/components/sections/nicoka-jobs'
 import { PageHero } from '@/components/sections/page-hero'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { candidateProcess, whyApply } from '@/lib/bys-content'
 import { getIcon } from '@/lib/icons'
+import { nicokaEnabled } from '@/lib/nicoka'
 import { candidatesContent } from '@/lib/site-content'
 import { cn } from '@/lib/utils'
 
@@ -76,7 +80,7 @@ function ApplicationModal({
             exit={{ opacity: 0, y: 20, scale: 0.97 }}
             transition={{ duration: 0.28, ease }}
             onClick={(e) => e.stopPropagation()}
-            className="relative my-8 w-full max-w-lg rounded-3xl bg-card p-6 shadow-[0_40px_100px_-20px_oklch(0.2_0.02_264/0.5)] sm:p-8"
+            className="relative my-8 w-full max-w-lg rounded-3xl bg-card p-6 shadow-[0_40px_100px_-20px_oklch(0.24_0.03_258/0.5)] sm:p-8"
           >
             <button
               type="button"
@@ -255,7 +259,7 @@ function ApplicationModal({
 }
 
 export function CandidatesContent() {
-  const { hero, offers, approach, jobs, process, cta } = candidatesContent
+  const { hero, offers, cta } = candidatesContent
   const [activeOffer, setActiveOffer] = useState<Offer | null>(null)
 
   return (
@@ -268,7 +272,11 @@ export function CandidatesContent() {
         breadcrumb="Candidats"
       />
 
-      {/* OFFRES D'EMPLOI — première section */}
+      {/* OFFRES D'EMPLOI — servies par Nicoka dès que l'instance est renseignée,
+          sinon on retombe sur les offres de démonstration. */}
+      {nicokaEnabled ? (
+        <NicokaJobs />
+      ) : (
       <section className="border-b border-border/60 bg-background">
         <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-24 lg:px-8">
           <motion.div
@@ -308,7 +316,7 @@ export function CandidatesContent() {
                     hidden: { opacity: 0, y: 18 },
                     visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease } },
                   }}
-                  className="group flex flex-col rounded-2xl border border-border/60 bg-card p-6 transition-all hover:border-primary/30 hover:shadow-[0_20px_50px_-20px_oklch(0.55_0.2_260/0.18)]"
+                  className="group flex flex-col rounded-2xl border border-border/60 bg-card p-6 transition-all hover:border-primary/30 hover:shadow-[0_20px_50px_-20px_oklch(0.4_0.07_258/0.18)]"
                 >
                   {/* En-tête : catégorie + icon */}
                   <div className="flex items-center justify-between">
@@ -359,8 +367,9 @@ export function CandidatesContent() {
           </motion.div>
         </div>
       </section>
+      )}
 
-      {/* APPROCHE */}
+      {/* VOLET 1 — Quel est le process de recrutement ? */}
       <section className="border-b border-border/60 bg-muted/30">
         <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-24 lg:px-8">
           <motion.div
@@ -371,54 +380,60 @@ export function CandidatesContent() {
             className="mx-auto max-w-3xl text-center"
           >
             <p className="font-display text-[11px] font-semibold tracking-[0.2em] text-muted-foreground uppercase">
-              {approach.eyebrow}
+              Côté candidat
             </p>
             <h2 className="mt-4 font-display text-balance text-3xl leading-[1.1] tracking-[-0.02em] text-foreground sm:text-4xl lg:text-[44px]">
-              {approach.title}
+              Quel est le process de recrutement ?
             </h2>
             <p className="mt-5 text-base leading-relaxed text-muted-foreground sm:text-[17px]">
-              {approach.description}
+              Cinq étapes, annoncées à l&apos;avance. Vous savez toujours où vous
+              en êtes et ce qui vous attend ensuite.
             </p>
           </motion.div>
 
-          <motion.div
+          <motion.ol
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
+            viewport={{ once: true, amount: 0.15 }}
             variants={{
               hidden: {},
-              visible: { transition: { staggerChildren: 0.1, delayChildren: 0.15 } },
+              visible: { transition: { staggerChildren: 0.09, delayChildren: 0.15 } },
             }}
-            className="mt-14 grid gap-5 sm:grid-cols-3 sm:gap-6"
+            className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-5"
           >
-            {approach.items.map((item) => {
+            {candidateProcess.map((item) => {
               const Icon = getIcon(item.iconName)
               return (
-                <motion.div
-                  key={item.title}
+                <motion.li
+                  key={item.step}
                   variants={{
                     hidden: { opacity: 0, y: 20 },
                     visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease } },
                   }}
-                  className="group rounded-2xl border border-border/60 bg-background p-7 transition-all hover:border-primary/30 hover:shadow-[0_20px_50px_-20px_oklch(0.55_0.2_260/0.18)]"
+                  className="rounded-2xl border border-border/60 bg-background p-6 transition-colors hover:border-primary/30"
                 >
-                  <span className="inline-flex size-11 items-center justify-center rounded-xl bg-gradient-to-br from-primary/15 to-primary/5 text-primary ring-1 ring-primary/20 transition-transform duration-300 group-hover:scale-105">
-                    <Icon className="size-5" aria-hidden />
-                  </span>
-                  <h3 className="mt-5 font-display text-xl font-semibold tracking-tight text-foreground">
+                  <div className="flex items-center justify-between">
+                    <span className="flex size-10 items-center justify-center rounded-xl bg-primary/8 text-primary ring-1 ring-primary/12">
+                      <Icon className="size-4.5" aria-hidden />
+                    </span>
+                    <span className="font-display text-2xl font-bold tracking-tight text-muted-foreground/25">
+                      {item.step}
+                    </span>
+                  </div>
+                  <h3 className="mt-5 font-display text-base font-semibold leading-snug text-foreground">
                     {item.title}
                   </h3>
-                  <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground">
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                     {item.description}
                   </p>
-                </motion.div>
+                </motion.li>
               )
             })}
-          </motion.div>
+          </motion.ol>
         </div>
       </section>
 
-      {/* POSTES — catégories */}
+      {/* VOLET 2 — Pourquoi postuler chez BYS Consulting ? */}
       <section className="border-b border-border/60 bg-background">
         <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-24 lg:px-8">
           <motion.div
@@ -429,13 +444,15 @@ export function CandidatesContent() {
             className="mx-auto max-w-3xl text-center"
           >
             <p className="font-display text-[11px] font-semibold tracking-[0.2em] text-muted-foreground uppercase">
-              {jobs.eyebrow}
+              Nos engagements
             </p>
             <h2 className="mt-4 font-display text-balance text-3xl leading-[1.1] tracking-[-0.02em] text-foreground sm:text-4xl lg:text-[44px]">
-              {jobs.title}
+              Pourquoi postuler chez BYS Consulting ?
             </h2>
             <p className="mt-5 text-base leading-relaxed text-muted-foreground sm:text-[17px]">
-              {jobs.description}
+              Nous ne sommes pas une plateforme d&apos;annonces. Nous prenons le
+              temps de comprendre votre parcours et de vous accompagner
+              jusqu&apos;après la signature.
             </p>
           </motion.div>
 
@@ -445,30 +462,30 @@ export function CandidatesContent() {
             viewport={{ once: true, amount: 0.15 }}
             variants={{
               hidden: {},
-              visible: { transition: { staggerChildren: 0.06, delayChildren: 0.15 } },
+              visible: { transition: { staggerChildren: 0.08, delayChildren: 0.15 } },
             }}
-            className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
+            className="mt-14 grid gap-5 sm:grid-cols-2"
           >
-            {jobs.items.map((item) => {
+            {whyApply.map((item) => {
               const Icon = getIcon(item.iconName)
               return (
                 <motion.div
-                  key={item.label}
+                  key={item.title}
                   variants={{
                     hidden: { opacity: 0, y: 16 },
                     visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease } },
                   }}
-                  className="flex items-start gap-4 rounded-xl border border-border/60 bg-background p-5"
+                  className="flex items-start gap-4 rounded-2xl border border-border/60 bg-background p-6 transition-colors hover:border-primary/30 sm:p-7"
                 >
-                  <span className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary ring-1 ring-primary/15">
-                    <Icon className="size-4.5" aria-hidden />
+                  <span className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-primary/8 text-primary ring-1 ring-primary/12">
+                    <Icon className="size-5" aria-hidden />
                   </span>
                   <div className="min-w-0">
-                    <h3 className="font-display text-base font-semibold text-foreground">
-                      {item.label}
+                    <h3 className="font-display text-lg font-semibold tracking-tight text-foreground">
+                      {item.title}
                     </h3>
-                    <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-                      {item.examples}
+                    <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">
+                      {item.description}
                     </p>
                   </div>
                 </motion.div>
@@ -478,7 +495,7 @@ export function CandidatesContent() {
         </div>
       </section>
 
-      {/* PROCESS */}
+      {/* VOLET 3 — Les métiers sur lesquels nous recrutons */}
       <section className="border-b border-border/60 bg-muted/30">
         <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-24 lg:px-8">
           <motion.div
@@ -489,50 +506,31 @@ export function CandidatesContent() {
             className="mx-auto max-w-3xl text-center"
           >
             <p className="font-display text-[11px] font-semibold tracking-[0.2em] text-muted-foreground uppercase">
-              {process.eyebrow}
+              Nos périmètres
             </p>
             <h2 className="mt-4 font-display text-balance text-3xl leading-[1.1] tracking-[-0.02em] text-foreground sm:text-4xl lg:text-[44px]">
-              {process.title}
+              Les métiers sur lesquels nous recrutons
             </h2>
+            <p className="mt-5 text-base leading-relaxed text-muted-foreground sm:text-[17px]">
+              Votre métier n&apos;est pas dans la liste ? Écrivez-nous quand même :
+              nos missions évoluent en permanence.
+            </p>
           </motion.div>
 
-          <motion.ol
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.15 }}
-            variants={{
-              hidden: {},
-              visible: { transition: { staggerChildren: 0.1, delayChildren: 0.15 } },
-            }}
-            className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4"
-          >
-            {process.items.map((item, i) => (
-              <motion.li
-                key={item.step}
-                variants={{
-                  hidden: { opacity: 0, y: 20 },
-                  visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease } },
-                }}
-                className="relative rounded-2xl border border-border/60 bg-background p-7"
-              >
-                <span className="font-display text-3xl font-bold tracking-tight text-primary/80">
-                  {item.step}
-                </span>
-                <h3 className="mt-3 font-display text-lg font-semibold text-foreground">
-                  {item.title}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                  {item.description}
-                </p>
-                {i < process.items.length - 1 && (
-                  <ArrowRight
-                    className="absolute -right-2 top-1/2 hidden -translate-y-1/2 text-border lg:block"
-                    aria-hidden
-                  />
-                )}
-              </motion.li>
-            ))}
-          </motion.ol>
+          <JobFamilies compact className="mt-14" />
+
+          <div className="mt-10 flex justify-center">
+            <Link
+              href="/secteurs"
+              className="group inline-flex items-center gap-2 text-sm font-semibold text-primary transition-colors hover:text-primary/80"
+            >
+              Voir le détail des postes par métier
+              <ArrowRight
+                className="size-4 transition-transform duration-300 group-hover:translate-x-1"
+                aria-hidden
+              />
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -557,7 +555,7 @@ export function CandidatesContent() {
             <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
               <Link
                 href="/contact"
-                className="group inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground shadow-[0_8px_24px_-8px_oklch(0.48_0.22_260/0.5)] transition-all hover:shadow-[0_12px_32px_-8px_oklch(0.48_0.22_260/0.6)]"
+                className="group inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground shadow-[0_8px_24px_-8px_oklch(0.35_0.095_258/0.5)] transition-all hover:shadow-[0_12px_32px_-8px_oklch(0.35_0.095_258/0.6)]"
               >
                 <span>{cta.button}</span>
                 <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden />

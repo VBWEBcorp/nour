@@ -14,15 +14,15 @@ export function ProcessTimeline() {
   const reduce = useReducedMotion()
 
   return (
-    <section className="relative isolate overflow-hidden bg-[oklch(0.15_0.03_262)] text-white">
+    <section className="relative isolate overflow-hidden bg-[oklch(0.21_0.045_258)] text-white">
       <div className="absolute inset-0 -z-10" aria-hidden>
-        <div className="absolute inset-0 bg-gradient-to-b from-[oklch(0.14_0.03_262)] via-[oklch(0.16_0.04_262)] to-[oklch(0.14_0.03_262)]" />
-        <div className="absolute left-1/2 top-1/4 h-[30rem] w-[46rem] -translate-x-1/2 rounded-full bg-[radial-gradient(ellipse_at_center,oklch(0.55_0.2_262/0.16),transparent_65%)] blur-3xl" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[oklch(0.19_0.04_258)] via-[oklch(0.22_0.05_258)] to-[oklch(0.19_0.04_258)]" />
+        <div className="absolute left-1/2 top-1/4 h-[30rem] w-[46rem] -translate-x-1/2 rounded-full bg-[radial-gradient(ellipse_at_center,oklch(0.4_0.07_258/0.16),transparent_65%)] blur-3xl" />
       </div>
 
       <div className="mx-auto max-w-6xl px-4 py-24 sm:px-6 sm:py-28 lg:px-8 lg:py-32">
         <Reveal className="mx-auto max-w-2xl text-center">
-          <p className="font-display text-xs font-semibold uppercase tracking-[0.22em] text-[oklch(0.8_0.13_260)]">
+          <p className="font-display text-xs font-semibold uppercase tracking-[0.22em] text-[oklch(0.84_0.05_255)]">
             Notre process
           </p>
           <h2 className="mt-4 text-balance font-display text-3xl leading-[1.12] tracking-[-0.02em] text-white sm:text-4xl md:text-[2.6rem]">
@@ -63,13 +63,13 @@ export function ProcessTimeline() {
                   className="relative flex items-start gap-5 lg:flex-col lg:items-center lg:gap-0 lg:text-center"
                 >
                   {/* Node */}
-                  <div className="relative z-10 flex size-14 shrink-0 items-center justify-center rounded-2xl border border-white/15 bg-[oklch(0.2_0.04_262)] shadow-[0_10px_30px_-10px_oklch(0.6_0.2_262/0.5)] backdrop-blur-sm">
+                  <div className="relative z-10 flex size-14 shrink-0 items-center justify-center rounded-2xl border border-white/15 bg-[oklch(0.26_0.05_258)] shadow-[0_10px_30px_-10px_oklch(0.44_0.08_258/0.5)] backdrop-blur-sm">
                     <span
-                      className="absolute inset-0 rounded-2xl bg-[radial-gradient(circle_at_50%_0%,oklch(0.6_0.2_262/0.35),transparent_70%)]"
+                      className="absolute inset-0 rounded-2xl bg-[radial-gradient(circle_at_50%_0%,oklch(0.44_0.08_258/0.35),transparent_70%)]"
                       aria-hidden
                     />
-                    <Icon className="relative size-6 text-[oklch(0.82_0.13_260)]" aria-hidden />
-                    <span className="absolute -right-1.5 -top-1.5 flex size-5 items-center justify-center rounded-full bg-white text-[10px] font-bold text-[oklch(0.2_0.04_262)]">
+                    <Icon className="relative size-6 text-[oklch(0.86_0.045_255)]" aria-hidden />
+                    <span className="absolute -right-1.5 -top-1.5 flex size-5 items-center justify-center rounded-full bg-white text-[10px] font-bold text-[oklch(0.26_0.05_258)]">
                       {i + 1}
                     </span>
                   </div>
@@ -93,7 +93,7 @@ export function ProcessTimeline() {
                             className="flex items-start gap-2 text-xs leading-relaxed text-white/55"
                           >
                             <span
-                              className="mt-1.5 size-1 shrink-0 rounded-full bg-[oklch(0.72_0.16_260)]"
+                              className="mt-1.5 size-1 shrink-0 rounded-full bg-[oklch(0.8_0.055_255)]"
                               aria-hidden
                             />
                             <span>{ss}</span>
@@ -111,7 +111,7 @@ export function ProcessTimeline() {
         <Reveal delay={0.15} className="mt-16 flex justify-center">
           <Link
             href="/contact"
-            className="group inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-white px-6 text-sm font-semibold text-[oklch(0.2_0.04_262)] shadow-[0_10px_40px_-10px_oklch(0.6_0.2_260/0.5)] transition-all hover:shadow-[0_14px_48px_-10px_oklch(0.6_0.2_260/0.65)] active:translate-y-px"
+            className="group inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-white px-6 text-sm font-semibold text-[oklch(0.26_0.05_258)] shadow-[0_10px_40px_-10px_oklch(0.44_0.08_258/0.5)] transition-all hover:shadow-[0_14px_48px_-10px_oklch(0.44_0.08_258/0.65)] active:translate-y-px"
           >
             Lancer votre recrutement
             <ArrowRight

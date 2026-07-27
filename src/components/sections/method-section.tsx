@@ -119,7 +119,7 @@ export function MethodSection() {
                   hidden: { opacity: 0, y: 20 },
                   visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease } },
                 }}
-                className="group relative overflow-hidden rounded-2xl border border-border/60 bg-background p-7 transition-all hover:border-primary/30 hover:shadow-[0_20px_50px_-20px_oklch(0.55_0.2_260/0.18)]"
+                className="group relative overflow-hidden rounded-2xl border border-border/60 bg-background p-7 transition-all hover:border-primary/30 hover:shadow-[0_20px_50px_-20px_oklch(0.4_0.07_258/0.18)]"
               >
                 {/* Numéro discret */}
                 <span className="absolute right-5 top-5 font-display text-xs font-semibold tracking-[0.18em] text-muted-foreground/50">

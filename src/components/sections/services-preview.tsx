@@ -23,7 +23,7 @@ export function ServicesPreview() {
   const reduceMotion = useReducedMotion()
 
   return (
-    <section className="border-b border-border/60 bg-[oklch(0.975_0.012_260)] dark:bg-[oklch(0.16_0.02_260)]">
+    <section className="border-b border-border/60 bg-[oklch(0.975_0.008_258)] dark:bg-[oklch(0.21_0.03_258)]">
       <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
         <SectionTitle
           eyebrow={servicesPreviewContent.eyebrow}

@@ -40,7 +40,7 @@ export function CandidatesBand() {
 
             <Link
               href={candidatesBandContent.href}
-              className="group inline-flex shrink-0 items-center gap-2 rounded-xl border border-border/80 bg-background px-4 py-2.5 text-sm font-medium text-foreground shadow-[0_4px_14px_-4px_oklch(0.2_0.02_264/0.12)] transition-all hover:border-primary/40 hover:bg-foreground hover:text-background"
+              className="group inline-flex shrink-0 items-center gap-2 rounded-xl border border-border/80 bg-background px-4 py-2.5 text-sm font-medium text-foreground shadow-[0_4px_14px_-4px_oklch(0.24_0.03_258/0.12)] transition-all hover:border-primary/40 hover:bg-foreground hover:text-background"
             >
               <span>{candidatesBandContent.button}</span>
               <ArrowUpRight className="size-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />

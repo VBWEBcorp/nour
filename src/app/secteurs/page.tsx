@@ -1,14 +1,14 @@
 import type { Metadata } from 'next'
 
 import { HomeCta } from '@/components/home/home-cta'
+import { JobFamilies } from '@/components/sections/job-families'
 import { PageHero } from '@/components/sections/page-hero'
-import { SectorsGrid } from '@/components/sections/sectors-grid'
 import { breadcrumbJsonLd, webPageJsonLd } from '@/components/seo/json-ld'
 import { images } from '@/lib/site-content'
-import { sectors } from '@/lib/bys-content'
+import { jobFamilies } from '@/lib/bys-content'
 
 const description =
-  "Comptabilité, finance, RH, juridique, IT, IA, assistanat, ADV, commerce, supply chain, achats, BTP : découvrez les secteurs et fonctions supports sur lesquels BYS Consulting recrute et accompagne."
+  "Comptabilité & finance, paie, juridique & RH, IT & IA, assistanat de direction, commerce, ADV, achats, supply chain, BTP : découvrez les métiers sur lesquels BYS Consulting recrute et accompagne."
 
 export const metadata: Metadata = {
   title: 'Secteurs & métiers',
@@ -47,7 +47,7 @@ export default function SecteursPage() {
         <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-24 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
             <p className="font-display text-xs font-semibold uppercase tracking-[0.22em] text-primary">
-              {sectors.length} domaines d&apos;expertise
+              {jobFamilies.length} domaines d&apos;expertise
             </p>
             <h2 className="mt-4 text-balance font-display text-3xl leading-[1.12] tracking-[-0.02em] text-foreground sm:text-4xl">
               Chaque métier a ses codes. Nous les connaissons.
@@ -59,9 +59,7 @@ export default function SecteursPage() {
             </p>
           </div>
 
-          <div className="mt-14">
-            <SectorsGrid />
-          </div>
+          <JobFamilies className="mt-14" />
         </div>
       </section>
 

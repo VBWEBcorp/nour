@@ -92,12 +92,12 @@ export function ContactContent() {
         {/* Trust row */}
         <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-sm text-white/80">
           <div className="flex items-center gap-2">
-            <Clock className="size-4 text-[oklch(0.78_0.15_260)]" aria-hidden />
+            <Clock className="size-4 text-[oklch(0.84_0.05_255)]" aria-hidden />
             <span>Réponse sous 24h</span>
           </div>
           <span className="hidden h-1 w-1 rounded-full bg-white/40 sm:inline" aria-hidden />
           <div className="flex items-center gap-2">
-            <Send className="size-4 text-[oklch(0.78_0.15_260)]" aria-hidden />
+            <Send className="size-4 text-[oklch(0.84_0.05_255)]" aria-hidden />
             <span>Devis gratuit</span>
           </div>
           <span className="hidden h-1 w-1 rounded-full bg-white/40 sm:inline" aria-hidden />
@@ -118,14 +118,14 @@ export function ContactContent() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, ease }}
             >
-              <div className="relative overflow-hidden rounded-3xl bg-card/90 p-7 shadow-[0_20px_50px_-20px_oklch(0.2_0.02_264/0.25)] backdrop-blur-sm sm:p-9">
+              <div className="relative overflow-hidden rounded-3xl bg-card/90 p-7 shadow-[0_20px_50px_-20px_oklch(0.24_0.03_258/0.25)] backdrop-blur-sm sm:p-9">
                 {/* Bordure dégradée */}
                 <div
                   className="pointer-events-none absolute inset-0 rounded-3xl p-px"
                   aria-hidden
                   style={{
                     background:
-                      'linear-gradient(135deg, oklch(0.55 0.2 260 / 0.4) 0%, oklch(0.91 0.012 264 / 0.55) 50%, oklch(0.55 0.2 260 / 0.4) 100%)',
+                      'linear-gradient(135deg, oklch(0.4 0.07 258 / 0.4) 0%, oklch(0.92 0.012 258 / 0.55) 50%, oklch(0.4 0.07 258 / 0.4) 100%)',
                     WebkitMask:
                       'linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)',
                     WebkitMaskComposite: 'xor',
@@ -185,7 +185,7 @@ export function ContactContent() {
                             placeholder="Jean"
                             autoComplete="given-name"
                             required
-                            className="h-11 rounded-xl bg-background/70 transition-shadow focus-visible:shadow-[0_0_0_4px_oklch(0.55_0.2_260/0.1)]"
+                            className="h-11 rounded-xl bg-background/70 transition-shadow focus-visible:shadow-[0_0_0_4px_oklch(0.4_0.07_258/0.1)]"
                           />
                         </div>
                         <div className="space-y-2">
@@ -196,7 +196,7 @@ export function ContactContent() {
                             placeholder="Dupont"
                             autoComplete="family-name"
                             required
-                            className="h-11 rounded-xl bg-background/70 transition-shadow focus-visible:shadow-[0_0_0_4px_oklch(0.55_0.2_260/0.1)]"
+                            className="h-11 rounded-xl bg-background/70 transition-shadow focus-visible:shadow-[0_0_0_4px_oklch(0.4_0.07_258/0.1)]"
                           />
                         </div>
                       </div>
@@ -209,7 +209,7 @@ export function ContactContent() {
                           placeholder="jean@entreprise.fr"
                           autoComplete="email"
                           required
-                          className="h-11 rounded-xl bg-background/70 transition-shadow focus-visible:shadow-[0_0_0_4px_oklch(0.55_0.2_260/0.1)]"
+                          className="h-11 rounded-xl bg-background/70 transition-shadow focus-visible:shadow-[0_0_0_4px_oklch(0.4_0.07_258/0.1)]"
                         />
                       </div>
                       <div className="space-y-2">
@@ -222,7 +222,7 @@ export function ContactContent() {
                           type="tel"
                           placeholder="06 12 34 56 78"
                           autoComplete="tel"
-                          className="h-11 rounded-xl bg-background/70 transition-shadow focus-visible:shadow-[0_0_0_4px_oklch(0.55_0.2_260/0.1)]"
+                          className="h-11 rounded-xl bg-background/70 transition-shadow focus-visible:shadow-[0_0_0_4px_oklch(0.4_0.07_258/0.1)]"
                         />
                       </div>
                       <div className="space-y-2">
@@ -233,7 +233,7 @@ export function ContactContent() {
                           rows={5}
                           required
                           placeholder="Décrivez votre projet en quelques mots..."
-                          className="w-full rounded-xl border border-input bg-background/70 px-3.5 py-3 text-sm leading-relaxed text-foreground transition-shadow placeholder:text-muted-foreground focus-visible:border-ring focus-visible:shadow-[0_0_0_4px_oklch(0.55_0.2_260/0.1)] focus-visible:outline-none"
+                          className="w-full rounded-xl border border-input bg-background/70 px-3.5 py-3 text-sm leading-relaxed text-foreground transition-shadow placeholder:text-muted-foreground focus-visible:border-ring focus-visible:shadow-[0_0_0_4px_oklch(0.4_0.07_258/0.1)] focus-visible:outline-none"
                         />
                       </div>
                       {error && (
@@ -262,13 +262,13 @@ export function ContactContent() {
               className="space-y-5"
             >
               {/* Info card */}
-              <div className="relative overflow-hidden rounded-3xl bg-card/90 p-7 shadow-[0_10px_30px_-12px_oklch(0.2_0.02_264/0.18)] backdrop-blur-sm">
+              <div className="relative overflow-hidden rounded-3xl bg-card/90 p-7 shadow-[0_10px_30px_-12px_oklch(0.24_0.03_258/0.18)] backdrop-blur-sm">
                 <div
                   className="pointer-events-none absolute inset-0 rounded-3xl p-px"
                   aria-hidden
                   style={{
                     background:
-                      'linear-gradient(135deg, oklch(0.55 0.2 260 / 0.35) 0%, oklch(0.91 0.012 264 / 0.55) 50%, oklch(0.55 0.2 260 / 0.35) 100%)',
+                      'linear-gradient(135deg, oklch(0.4 0.07 258 / 0.35) 0%, oklch(0.92 0.012 258 / 0.55) 50%, oklch(0.4 0.07 258 / 0.35) 100%)',
                     WebkitMask:
                       'linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)',
                     WebkitMaskComposite: 'xor',
@@ -340,13 +340,13 @@ export function ContactContent() {
               </div>
 
               {/* Carte Google Maps */}
-              <div className="group relative overflow-hidden rounded-3xl shadow-[0_10px_30px_-12px_oklch(0.2_0.02_264/0.18)]">
+              <div className="group relative overflow-hidden rounded-3xl shadow-[0_10px_30px_-12px_oklch(0.24_0.03_258/0.18)]">
                 <div
                   className="pointer-events-none absolute inset-0 z-10 rounded-3xl p-px"
                   aria-hidden
                   style={{
                     background:
-                      'linear-gradient(135deg, oklch(0.55 0.2 260 / 0.3) 0%, oklch(0.91 0.012 264 / 0.5) 50%, oklch(0.55 0.2 260 / 0.3) 100%)',
+                      'linear-gradient(135deg, oklch(0.4 0.07 258 / 0.3) 0%, oklch(0.92 0.012 258 / 0.5) 50%, oklch(0.4 0.07 258 / 0.3) 100%)',
                     WebkitMask:
                       'linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)',
                     WebkitMaskComposite: 'xor',

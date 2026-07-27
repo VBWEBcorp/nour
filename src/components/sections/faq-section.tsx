@@ -51,7 +51,7 @@ function FaqAccordionItem({
           aria-hidden
           style={{
             background:
-              'linear-gradient(135deg, oklch(0.55 0.2 260 / 0.35) 0%, oklch(0.91 0.012 264 / 0.5) 50%, oklch(0.55 0.2 260 / 0.35) 100%)',
+              'linear-gradient(135deg, oklch(0.4 0.07 258 / 0.35) 0%, oklch(0.92 0.012 258 / 0.5) 50%, oklch(0.4 0.07 258 / 0.35) 100%)',
             WebkitMask:
               'linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)',
             WebkitMaskComposite: 'xor',
@@ -111,7 +111,7 @@ export function FaqSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(0)
 
   return (
-    <section className="border-b border-border/60 bg-[oklch(0.975_0.012_260)] dark:bg-[oklch(0.16_0.02_260)]">
+    <section className="border-b border-border/60 bg-[oklch(0.975_0.008_258)] dark:bg-[oklch(0.21_0.03_258)]">
       <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
         <SectionTitle
           eyebrow={faq.eyebrow}

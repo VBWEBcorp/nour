@@ -13,7 +13,11 @@ export function Convictions() {
             Nos convictions
           </p>
           <h2 className="mt-4 text-balance font-display text-3xl leading-[1.12] tracking-[-0.02em] text-foreground sm:text-4xl md:text-[2.6rem]">
-            Trois principes qui guident chacune de nos missions
+            Ce partenariat repose sur trois convictions que nous ne{' '}
+            <span className="font-serif font-normal italic text-primary">
+              négocions pas
+            </span>
+            .
           </h2>
           <p className="mt-5 text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg">
             Ce ne sont pas des mots sur une plaquette. Ce sont les règles que nous
@@ -26,7 +30,7 @@ export function Convictions() {
             const Icon = getIcon(c.iconName)
             return (
               <Reveal key={c.title} delay={i * 0.1} className="h-full">
-                <article className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-border/60 bg-card p-8 shadow-[0_2px_8px_oklch(0.2_0.02_264/0.05)] transition-all duration-300 hover:-translate-y-1 hover:border-primary/25 hover:shadow-[0_30px_60px_-30px_oklch(0.5_0.2_262/0.25)]">
+                <article className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-border/60 bg-card p-8 shadow-[0_2px_8px_oklch(0.24_0.03_258/0.05)] transition-all duration-300 hover:-translate-y-1 hover:border-primary/25 hover:shadow-[0_30px_60px_-30px_oklch(0.37_0.07_258/0.25)]">
                   {/* Filet de lumière au survol */}
                   <span
                     className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"

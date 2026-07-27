@@ -21,7 +21,7 @@ const legalLinks = [
 
 export function Footer() {
   return (
-    <footer className="bg-[oklch(0.16_0.035_262)] text-zinc-300">
+    <footer className="bg-[oklch(0.21_0.045_258)] text-zinc-300">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         {/* Top: brand + nav columns */}
         <div className="grid gap-12 py-16 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr] lg:gap-16">

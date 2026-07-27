@@ -6,7 +6,6 @@ import { HomeCta } from '@/components/home/home-cta'
 import { NeedsBlocks } from '@/components/home/needs-blocks'
 import { ProcessTimeline } from '@/components/home/process-timeline'
 import { WhyBys } from '@/components/home/why-bys'
-import { TestimonialsSection } from '@/components/sections/testimonials-section'
 import { FaqSection } from '@/components/sections/faq-section'
 import {
   localBusinessJsonLd,
@@ -42,7 +41,6 @@ export default function HomePage() {
       <WhyBys />
       <Convictions />
       <ProcessTimeline />
-      <TestimonialsSection />
       <FaqSection />
       <HomeCta />
     </>

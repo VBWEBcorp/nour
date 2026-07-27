@@ -10,12 +10,12 @@ export function HomeCta() {
     <section className="bg-background">
       <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-24 lg:px-8">
         <Reveal>
-          <div className="relative isolate overflow-hidden rounded-[2rem] bg-[oklch(0.48_0.22_260)] px-6 py-16 text-center shadow-[0_40px_80px_-40px_oklch(0.48_0.22_260/0.55)] sm:px-12 sm:py-20">
+          <div className="relative isolate overflow-hidden rounded-[2rem] bg-[oklch(0.35_0.095_258)] px-6 py-16 text-center shadow-[0_40px_80px_-40px_oklch(0.35_0.095_258/0.55)] sm:px-12 sm:py-20">
             {/* Décor */}
             <div className="absolute inset-0 -z-10" aria-hidden>
-              <div className="absolute inset-0 bg-gradient-to-br from-[oklch(0.54_0.2_262)] via-[oklch(0.46_0.22_260)] to-[oklch(0.38_0.2_258)]" />
+              <div className="absolute inset-0 bg-gradient-to-br from-[oklch(0.4_0.075_258)] via-[oklch(0.33_0.09_258)] to-[oklch(0.27_0.075_258)]" />
               <div className="absolute -left-20 -top-20 h-72 w-72 rounded-full bg-white/10 blur-3xl" />
-              <div className="absolute -bottom-24 -right-16 h-80 w-80 rounded-full bg-[oklch(0.7_0.16_240/0.25)] blur-3xl" />
+              <div className="absolute -bottom-24 -right-16 h-80 w-80 rounded-full bg-[oklch(0.8_0.05_255/0.25)] blur-3xl" />
               <div
                 className="absolute inset-0 opacity-[0.5]"
                 style={{
@@ -45,7 +45,7 @@ export function HomeCta() {
             <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <Link
                 href="/contact"
-                className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-white px-6 text-sm font-semibold text-[oklch(0.42_0.2_260)] shadow-lg transition-transform hover:-translate-y-0.5 active:translate-y-0 sm:w-auto"
+                className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-white px-6 text-sm font-semibold text-[oklch(0.3_0.085_258)] shadow-lg transition-transform hover:-translate-y-0.5 active:translate-y-0 sm:w-auto"
               >
                 <CalendarCheck className="size-4" aria-hidden />
                 Prendre rendez-vous

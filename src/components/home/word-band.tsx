@@ -30,7 +30,7 @@ export function WordBand({
           <span
             className={cn(
               'size-1 rounded-full',
-              dark ? 'bg-[oklch(0.72_0.16_260)]' : 'bg-primary'
+              dark ? 'bg-[oklch(0.8_0.055_255)]' : 'bg-primary'
             )}
             aria-hidden
           />
@@ -55,7 +55,7 @@ export function WordBand({
         className={cn(
           'pointer-events-none absolute inset-y-0 left-0 z-10 w-16 sm:w-28',
           dark
-            ? 'bg-gradient-to-r from-[oklch(0.15_0.03_262)] to-transparent'
+            ? 'bg-gradient-to-r from-[oklch(0.21_0.045_258)] to-transparent'
             : 'bg-gradient-to-r from-background to-transparent'
         )}
       />
@@ -63,7 +63,7 @@ export function WordBand({
         className={cn(
           'pointer-events-none absolute inset-y-0 right-0 z-10 w-16 sm:w-28',
           dark
-            ? 'bg-gradient-to-l from-[oklch(0.15_0.03_262)] to-transparent'
+            ? 'bg-gradient-to-l from-[oklch(0.21_0.045_258)] to-transparent'
             : 'bg-gradient-to-l from-background to-transparent'
         )}
       />

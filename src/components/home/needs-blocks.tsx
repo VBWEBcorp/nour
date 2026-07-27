@@ -42,7 +42,7 @@ function NeedRow({
         y={0}
         className={cn('relative', reversed && 'md:order-2')}
       >
-        <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-muted shadow-[0_30px_70px_-30px_oklch(0.2_0.05_262/0.35)] ring-1 ring-foreground/[0.06]">
+        <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-muted shadow-[0_30px_70px_-30px_oklch(0.26_0.05_258/0.35)] ring-1 ring-foreground/[0.06]">
           <motion.div className="absolute -inset-y-8 inset-x-0" style={{ y: imageY }}>
             <Image
               src={need.image}
@@ -53,7 +53,7 @@ function NeedRow({
               className="object-cover"
             />
           </motion.div>
-          <div className="absolute inset-0 bg-gradient-to-t from-[oklch(0.15_0.03_262)]/30 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[oklch(0.21_0.045_258)]/30 via-transparent to-transparent" />
           {/* Puce numéro */}
           <div className="absolute left-5 top-5 flex items-center gap-2 rounded-full bg-background/90 px-3 py-1.5 backdrop-blur-sm ring-1 ring-border/60">
             <Icon className="size-3.5 text-primary" aria-hidden />

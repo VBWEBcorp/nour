@@ -7,6 +7,7 @@
  */
 
 import {
+  Banknote,
   BarChart3,
   BrainCircuit,
   Briefcase,
@@ -17,8 +18,10 @@ import {
   Code,
   Compass,
   Cpu,
+  Eye,
   FileText,
   Globe,
+  Inbox,
   Hammer,
   Handshake,
   HardHat,
@@ -60,6 +63,7 @@ import {
 } from 'lucide-react'
 
 const iconMap: Record<string, LucideIcon> = {
+  Banknote,
   BarChart3,
   BrainCircuit,
   Briefcase,
@@ -70,8 +74,10 @@ const iconMap: Record<string, LucideIcon> = {
   Code,
   Compass,
   Cpu,
+  Eye,
   FileText,
   Globe,
+  Inbox,
   Hammer,
   Handshake,
   HardHat,

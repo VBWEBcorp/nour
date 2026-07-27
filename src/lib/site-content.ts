@@ -368,7 +368,7 @@ export const servicesContent = {
 export const contactContent = {
   hero: {
     eyebrow: 'Contact',
-    title: 'Discutons de vos enjeux',
+    title: 'Votre projet ? Notre mission.',
     description:
       'Un poste à pourvoir, un manager à accompagner, une équipe à faire grandir ? Échangeons. Nous répondons sous 24h.',
   },

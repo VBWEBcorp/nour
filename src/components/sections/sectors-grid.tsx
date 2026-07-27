@@ -40,7 +40,7 @@ export function SectorsGrid({
               hidden: { opacity: 0, y: reduce ? 0 : 18 },
               visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease } },
             }}
-            className="group relative overflow-hidden rounded-2xl border border-border/60 bg-card p-5 transition-all duration-300 hover:-translate-y-1 hover:border-primary/25 hover:shadow-[0_24px_50px_-28px_oklch(0.5_0.2_262/0.3)] sm:p-6"
+            className="group relative overflow-hidden rounded-2xl border border-border/60 bg-card p-5 transition-all duration-300 hover:-translate-y-1 hover:border-primary/25 hover:shadow-[0_24px_50px_-28px_oklch(0.37_0.07_258/0.3)] sm:p-6"
           >
             {/* Halo au survol */}
             <span

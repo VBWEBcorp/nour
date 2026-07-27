@@ -241,19 +241,19 @@ export const offers = [
     iconName: 'UserSearch',
     label: 'Recrutement CDI / CDD',
     description: 'Chasse de tête sur vos fonctions clés, alignée sur votre culture.',
-    href: '/services',
+    href: '#recruter',
   },
   {
     iconName: 'Waypoints',
     label: 'Intérim',
     description: "Des profils opérationnels immédiatement pour tenir la position.",
-    href: '/services',
+    href: '#interim',
   },
   {
     iconName: 'Compass',
     label: 'Coaching',
     description: 'Faire grandir dirigeants, managers et équipes dans la durée.',
-    href: '/services',
+    href: '#coacher',
   },
 ] as const
 
@@ -350,10 +350,14 @@ export const pitchCroise = {
   eyebrow: 'Recrutement × Coaching',
   title: "Recruter, c'est bien. Fidéliser, c'est mieux.",
   paragraphs: [
-    "La bonne personne, au bon poste, au bon moment : un recrutement semble réussi à la signature. Mais la vraie question, c'est : est-il encore là dans 6 mois ?",
-    "Un recrutement raté, ce n'est pas toujours le mauvais candidat. C'est parfois le bon, mal accueilli, mal accompagné, mal intégré.",
-    "C'est là qu'intervient le coaching : le prolongement naturel d'un recrutement bien pensé.",
+    "Le succès d'un recrutement se mesure souvent à la signature du contrat. La bonne personne, au bon poste, au bon moment. Mission accomplie.",
+    "Mais la vraie question n'est pas : avez-vous recruté le bon profil ? Elle est : est-il encore là dans 6 mois ?",
+    "Car ce que les chiffres disent, et que les entreprises savent trop bien, c'est qu'un recrutement raté coûte cher. En temps. En énergie. En désorganisation. Et surtout, en opportunités perdues.",
+    "Et un recrutement raté, ce n'est pas toujours le mauvais candidat. C'est parfois le bon candidat, mal accueilli, mal accompagné, mal intégré. Un talent qui part non pas parce qu'il n'était pas à sa place, mais parce qu'on ne l'a pas aidé à la trouver.",
+    "La période d'essai est le moment le plus fragile d'un recrutement. C'est là que tout se joue vraiment. Le candidat observe, doute, se compare à ses attentes. Le manager juge, s'impatiente, ne comprend pas toujours ce qu'il voit. Et entre les deux, il y a un fossé que personne ne pense à combler.",
+    "C'est précisément là qu'intervient le coaching. Pas comme un aveu d'échec. Pas comme un outil de remédiation. Mais comme le prolongement naturel d'un recrutement bien pensé.",
   ],
+  actionsTitle: 'Concrètement',
   actions: [
     'Accompagner le nouveau collaborateur dans sa prise de poste.',
     "Aligner ses ambitions avec les attentes de l'entreprise.",
@@ -362,4 +366,220 @@ export const pitchCroise = {
   ],
   closing:
     "Recruter sans accompagner, c'est planter une graine sans arroser. Le potentiel est là, mais rien ne garantit qu'il s'exprimera.",
+  outro: [
+    "C'est pourquoi chez BYS Consulting, recrutement et coaching ne sont pas deux services séparés. Ce sont deux temps d'un même engagement : vous aider à trouver le bon talent, et à le garder.",
+    "Parce que le turn-over n'est pas une fatalité. C'est souvent le symptôme d'un accompagnement qui s'est arrêté trop tôt.",
+  ],
+  signature: 'Nous, nous restons.',
 } as const
+
+// ---------------------------------------------------------------------------
+// Les métiers sur lesquels BYS Consulting intervient (page À propos & Secteurs)
+// ---------------------------------------------------------------------------
+export const jobFamilies = [
+  {
+    iconName: 'Calculator',
+    title: 'Comptabilité & Finance',
+    jobs: [
+      'Comptable Général',
+      'Comptable Clients',
+      'Comptable Fournisseurs',
+      'Collaborateur Comptable',
+      'Responsable Comptabilité',
+      'RAF',
+      'DAF',
+      'Directeur Financier',
+      'Chef de Mission',
+      'Expert-Comptable',
+      'Auditeur Financier',
+      'Contrôleur de Gestion',
+      'Comptable Fiscaliste',
+    ],
+  },
+  {
+    iconName: 'Banknote',
+    title: 'Paie',
+    jobs: [
+      'Gestionnaire Paie',
+      'Assistant Paie',
+      'Coordinateur Paie',
+      'Superviseur Paie',
+      'Responsable Paie',
+      'Expert Paie',
+      'Directeur Paie',
+      'Consultant SIRH',
+    ],
+  },
+  {
+    iconName: 'Scale',
+    title: 'Juridique & RH',
+    jobs: [
+      'Secrétaire Juridique',
+      'Assistant Juridique',
+      'Juriste',
+      'Responsable Juridique',
+      'Chargé de Conformité',
+      'Contrôleur Juridique',
+      'Chargé Ressources Humaines',
+      'Chargé Formation',
+      'RRH',
+      'DRH',
+    ],
+  },
+  {
+    iconName: 'BrainCircuit',
+    title: 'IT & IA',
+    jobs: [
+      'Data Analyst',
+      'Développeur',
+      'Administrateur BDD',
+      'Chef de Projet Applicatif',
+      'Product Owner',
+      'Ingénieur IA',
+      'Data Scientist',
+      'Data Engineer',
+      'ML Engineer',
+      'MLOps Engineer',
+      'AI Product Manager',
+      'Prompt Engineer',
+    ],
+  },
+  {
+    iconName: 'Briefcase',
+    title: 'Assistanat de Direction & Office Management',
+    jobs: [
+      'Secrétaire',
+      'Assistant(e) Administratif(ve)',
+      'Assistant(e) de Direction',
+      'Assistant(e) Bilingue',
+      'Assistant(e) Trilingue',
+      'Office Manager',
+      'Executive Assistant',
+      'Chef de Cabinet',
+    ],
+  },
+  {
+    iconName: 'Handshake',
+    title: 'Assistanat Commercial & Commerce',
+    jobs: [
+      'Assistante Commerciale',
+      'Chargé(e) de Clientèle BtoB/BtoC',
+      'Assistant(e) Import-Export',
+      'Technico-Commercial(e)',
+      'Analyste Commercial(e)',
+    ],
+  },
+  {
+    iconName: 'ClipboardCheck',
+    title: 'Administration des Ventes (ADV)',
+    jobs: [
+      'Assistant(e) ADV',
+      'Gestionnaire ADV',
+      'Coordinateur(trice) ADV',
+      'Assistant(e) SAV / Gestionnaire Litiges',
+      'Responsable ADV',
+    ],
+  },
+  {
+    iconName: 'ShoppingCart',
+    title: 'Achats & Approvisionnement',
+    jobs: [
+      'Assistant(e) Achats',
+      'Approvisionneur(se)',
+      'Acheteur(se)',
+      'Responsable Achats',
+    ],
+  },
+  {
+    iconName: 'Truck',
+    title: 'Logistique & Supply Chain',
+    jobs: [
+      'Coordinateur(trice) Logistique',
+      "Responsable d'Exploitation",
+      'Supply Chain Manager',
+      'Responsable E-commerce / Logistique Omnicanale',
+    ],
+  },
+  {
+    iconName: 'HardHat',
+    title: 'BTP',
+    jobs: [
+      'Dessinateur',
+      'Chef de Chantier',
+      "Chargé d'Affaires",
+      'Conducteur de Travaux',
+      'Ingénieur Travaux',
+    ],
+  },
+] as const
+
+// ---------------------------------------------------------------------------
+// Page Candidats — les volets adressés aux candidats
+// ---------------------------------------------------------------------------
+
+// Volet 1 — « Quel est le process de recrutement ? »
+export const candidateProcess = [
+  {
+    iconName: 'Inbox',
+    step: '01',
+    title: 'Réception et traitement des candidatures',
+    description:
+      'Chaque candidature est lue et étudiée. Vous recevez un retour, quelle que soit notre décision.',
+  },
+  {
+    iconName: 'Phone',
+    step: '02',
+    title: 'Premier échange téléphonique',
+    description:
+      'Un premier contact pour faire connaissance, comprendre votre recherche et vous présenter le poste.',
+  },
+  {
+    iconName: 'MessagesSquare',
+    step: '03',
+    title: 'Entretien approfondi',
+    description:
+      'Un entretien pour échanger plus en détail sur votre parcours, vos compétences et vos aspirations.',
+  },
+  {
+    iconName: 'Users',
+    step: '04',
+    title: 'Entretien client',
+    description:
+      "Nous organisons et préparons votre rencontre avec l'entreprise, en vous donnant toutes les clés.",
+  },
+  {
+    iconName: 'ClipboardCheck',
+    step: '05',
+    title: 'Débrief et retour',
+    description:
+      "Un retour clair après chaque étape, côté entreprise comme côté candidat. Sans langue de bois.",
+  },
+] as const
+
+// Volet 2 — « Pourquoi postuler chez BYS Consulting ? »
+export const whyApply = [
+  {
+    iconName: 'Eye',
+    title: 'Transparence des process',
+    description:
+      "Vous savez où vous postulez, qui décide, à quelle étape vous en êtes et pourquoi le poste existe.",
+  },
+  {
+    iconName: 'MessagesSquare',
+    title: 'Communication fluide',
+    description:
+      "Nous restons joignables et nous revenons vers vous. Pas de candidature qui disparaît dans le vide.",
+  },
+  {
+    iconName: 'Lightbulb',
+    title: 'Des conseils qui font la différence',
+    description:
+      "Améliorer votre CV, préparer votre entretien, travailler votre posture : de quoi réussir haut la main.",
+  },
+  {
+    iconName: 'Compass',
+    title: 'Un coaching pendant la période d’essai',
+    description:
+      "Possibilité de se faire accompagner sur du coaching au cours de votre période d'essai.",
+  },
+] as const
