@@ -198,7 +198,7 @@ export const faqContent = {
     {
       question: 'Quels sont vos délais de recrutement ?',
       answer:
-        "En moyenne 4 à 8 semaines entre le lancement de la mission et la signature du candidat. Nous présentons une shortlist de 3 à 4 profils qualifiés dans les 3 premières semaines.",
+        "Selon le besoin et l'urgence, comptez 2 à 4 semaines entre le lancement de la mission et la signature du candidat. Vous êtes tenu informé à chaque étape.",
     },
     {
       question: 'Quelle est votre méthode Leadership 3.0 ?',
@@ -206,9 +206,9 @@ export const faqContent = {
         "Une approche qui aligne chaque recrutement avec la culture, la vision et les valeurs de l'entreprise. Au-delà des compétences techniques, nous évaluons la capacité du candidat à incarner le projet de l'organisation et à contribuer à sa transformation.",
     },
     {
-      question: 'Proposez-vous une garantie sur vos recrutements ?',
+      question: 'Que se passe-t-il après la signature ?',
       answer:
-        "Oui. Nous garantissons nos recrutements pendant la période d'essai. En cas de départ, nous relançons la mission sans honoraires supplémentaires. Mais notre meilleure garantie reste notre méthode et le coaching d'intégration.",
+        "Notre engagement ne s'arrête pas à la signature. Nous suivons le candidat et l'entreprise pendant toute la période d'essai : points téléphoniques à J+15, J+30 et J+90, échanges avec le manager ou la DRH, et mise en place d'un coaching si besoin. C'est ce suivi qui fait que 9 recrutements sur 10 sont pérennes.",
     },
     {
       question: 'Pouvez-vous accompagner une équipe entière ?',
@@ -232,8 +232,8 @@ export const aboutContent = {
   },
   stats: [
     { value: '20+', label: "Années d'expérience cumulées" },
-    { value: '98%', label: 'Recrutements pérennes' },
-    { value: '4-8 sem', label: 'Délai moyen de recrutement' },
+    { value: '9 sur 10', label: 'Recrutements pérennes' },
+    { value: '2 à 4 sem', label: 'Délai de recrutement' },
     { value: '100%', label: 'Sur-mesure' },
   ],
   team: {
@@ -246,7 +246,7 @@ export const aboutContent = {
         name: 'Nourelhouda Boukhercha',
         firstName: 'Nour',
         role: 'Co-fondatrice · Recrutement & Conseil RH',
-        photo: 'https://i.ibb.co/twDnRCHC/Nour.jpg',
+        photo: '/equipe/nour-boukhercha.jpg',
         bio: "Après 5 années d'expérience en recrutement et en management, marquées par une passion pour l'accompagnement des talents et une forte exigence du service, Nour a co-fondé BYS Consulting pour donner vie à une vision plus engagée, humaine et stratégique du conseil RH.",
         highlights: [
           'Recrutement stratégique sur les fonctions supports',
@@ -259,7 +259,7 @@ export const aboutContent = {
         name: 'Samir Bourebaba',
         firstName: 'Samir',
         role: 'Co-fondateur · Coaching & Performance managériale',
-        photo: 'https://i.ibb.co/twySH76S/Samir.jpg',
+        photo: '/equipe/samir-bourebaba.jpg',
         bio: "Après plus de 15 ans d'expérience dans le sport et le football professionnel, Samir a forgé une vision profonde de la performance, de l'engagement et de la rigueur. Aujourd'hui, il accompagne dirigeants, managers et équipes à libérer leur potentiel et bâtir des performances durables.",
         highlights: [
           'Coaching individuel & collectif en entreprise',

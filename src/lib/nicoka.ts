@@ -6,12 +6,16 @@
  *   2. Intégration en iframe (`jobOnly=1`)      -> `nicokaEmbedUrl`   ← méthode active
  *   3. API Nicoka (nécessite la documentation)  -> à implémenter le jour où on l'obtient
  *
- * Tant que `NEXT_PUBLIC_NICOKA_INSTANCE` n'est pas renseignée, `nicokaEnabled`
- * vaut false et la page Candidats retombe sur les offres de démonstration.
+ * L'instance de BYS Consulting est `bysconsulting` (https://bysconsulting.nicoka.com,
+ * transmise par Nour le 21/09/2026). `NEXT_PUBLIC_NICOKA_INSTANCE` permet de la
+ * remplacer sans toucher au code ; une valeur vide désactive Nicoka et la page
+ * Candidats retombe sur les offres de démonstration.
  */
 
+const DEFAULT_INSTANCE = 'bysconsulting'
+
 /** Nom de l'instance Nicoka, ex. « bysconsulting » dans bysconsulting.nicoka.com */
-const rawInstance = process.env.NEXT_PUBLIC_NICOKA_INSTANCE ?? ''
+const rawInstance = process.env.NEXT_PUBLIC_NICOKA_INSTANCE ?? DEFAULT_INSTANCE
 
 /**
  * On ne garde que les caractères valides d'un sous-domaine : une valeur mal

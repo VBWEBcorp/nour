@@ -39,12 +39,11 @@ export async function POST(request: NextRequest) {
 
     const fullName = `${firstName} ${lastName}`
 
-    // Mode démo (site front-only) : sans identifiants SMTP, on simule un envoi
-    // réussi pour la démonstration. Renseigner les variables SMTP_* dans
-    // .env.local bascule automatiquement en envoi réel (code ci-dessous).
+    // Mode démo : sans RESEND_API_KEY ni identifiants SMTP (voir mailer.ts), on
+    // simule un envoi réussi. Le message est perdu, seul le journal le garde.
     if (!mailEnabled) {
-      console.info(
-        `[contact] Mode démo — message de ${fullName} <${email}>${phone ? ` (${phone})` : ''} : ${message}`
+      console.warn(
+        `[contact] Mode démo, rien n'est envoyé. Message de ${fullName} <${email}>${phone ? ` (${phone})` : ''} : ${message}`
       )
       return NextResponse.json({ success: true, demo: true })
     }
@@ -60,7 +59,7 @@ export async function POST(request: NextRequest) {
 
     const html = `
       <div style="font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:#111;line-height:1.6">
-        <h2 style="margin:0 0 16px">Nouveau message — ${esc(siteConfig.name)}</h2>
+        <h2 style="margin:0 0 16px">Nouveau message depuis le site ${esc(siteConfig.name)}</h2>
         <p style="margin:0 0 4px"><strong>Nom :</strong> ${esc(fullName)}</p>
         <p style="margin:0 0 4px"><strong>Email :</strong> <a href="mailto:${esc(email)}">${esc(email)}</a></p>
         ${phone ? `<p style="margin:0 0 4px"><strong>Téléphone :</strong> ${esc(phone)}</p>` : ''}
@@ -70,7 +69,7 @@ export async function POST(request: NextRequest) {
     `
 
     await sendMail({
-      subject: `Contact site — ${fullName}`,
+      subject: `[Site ${siteConfig.name}] Message de ${fullName}`,
       text: lines.join('\n'),
       html,
       replyTo: `${fullName} <${email}>`,

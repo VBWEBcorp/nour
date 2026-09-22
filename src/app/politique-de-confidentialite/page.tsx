@@ -49,7 +49,7 @@ export default function PrivacyPage() {
             Politique de confidentialité
           </h1>
           <p className="mt-4 text-sm text-muted-foreground">
-            Dernière mise à jour : [JJ/MM/AAAA]
+            Dernière mise à jour : 22/09/2026
           </p>
 
           <article className="mt-10 space-y-10 text-sm leading-relaxed text-muted-foreground [&_h2]:font-display [&_h2]:text-lg [&_h2]:font-semibold [&_h2]:text-foreground [&_h3]:text-sm [&_h3]:font-semibold [&_h3]:text-foreground">
@@ -71,16 +71,15 @@ export default function PrivacyPage() {
               <h2>1. Responsable du traitement</h2>
               <p>Le responsable du traitement des données est :</p>
               <ul className="list-inside list-disc space-y-1 pl-1">
-                <li><strong>Raison sociale :</strong> {siteConfig.name}</li>
-                <li>
-                  <strong>Adresse :</strong> {siteConfig.address.street}, {siteConfig.address.postalCode}{' '}
-                  {siteConfig.address.city}
-                </li>
+                <li><strong>Raison sociale :</strong> {siteConfig.name}, {siteConfig.legal.legalForm} ({siteConfig.legal.rcs})</li>
+                <li><strong>Représentée par :</strong> {siteConfig.legal.publisher}, Présidente</li>
                 <li><strong>Email :</strong> {siteConfig.email}</li>
                 <li><strong>Téléphone :</strong> {siteConfig.phone}</li>
               </ul>
               <p>
-                Délégué à la protection des données (DPO) : [Nom du DPO ou &quot;non désigné&quot;]
+                Aucun délégué à la protection des données (DPO) n&apos;a été désigné : les
+                demandes relatives aux données personnelles sont traitées directement par la
+                Présidente, à l&apos;adresse email ci-dessus.
               </p>
             </section>
 
@@ -181,9 +180,9 @@ export default function PrivacyPage() {
                     </tr>
                     <tr>
                       <td className="py-2.5 pr-4">Hébergement</td>
-                      <td className="py-2.5 pr-4">[Vercel / OVH / autre - à compléter]</td>
+                      <td className="py-2.5 pr-4">Netlify, Inc.</td>
                       <td className="py-2.5 pr-4">Hébergement du site et des API</td>
-                      <td className="py-2.5">[À compléter]</td>
+                      <td className="py-2.5">USA (EU-US Data Privacy Framework)</td>
                     </tr>
                     <tr>
                       <td className="py-2.5 pr-4">Base de données</td>
@@ -237,7 +236,7 @@ export default function PrivacyPage() {
             <section className="space-y-3">
               <h2>6. Transferts de données hors Union européenne</h2>
               <p>
-                Certains de nos sous-traitants techniques (Vercel, MongoDB Atlas, Cloudflare)
+                Certains de nos sous-traitants techniques (Netlify, MongoDB Atlas, Cloudflare, Resend)
                 peuvent traiter des données aux États-Unis. Ces transferts sont encadrés par :
               </p>
               <ul className="list-inside list-disc space-y-1 pl-1">
@@ -340,7 +339,7 @@ export default function PrivacyPage() {
                 <a href={`mailto:${siteConfig.email}`} className="font-medium text-primary underline underline-offset-4 hover:text-primary/80">
                   {siteConfig.email}
                 </a>{' '}
-                ou par courrier à l&apos;adresse indiquée ci-dessus. Nous répondons dans un délai
+                ou par téléphone au numéro indiqué ci-dessus. Nous répondons dans un délai
                 maximum de <strong>30 jours</strong> (prolongeable une fois de 60 jours en cas de
                 demande complexe, avec notification).
               </p>

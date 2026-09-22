@@ -327,7 +327,7 @@ Vérifié le 27/07/2026 contre le site rendu (`http://localhost:3002`).
 |---|---|---|
 | Palette bleu nuit + blanc | ✅ | `src/index.css` — teinte unique 258, chroma abaissé |
 | Site plus sobre | ✅ | 155 couleurs saturées remplacées, halos/glows/dégradés retirés |
-| Carte de visite | ⛔ | Fichier non fourni |
+| Carte de visite | ✅ | Reçue le 21/09/2026 (`public/carte-de-visite.png`), affichée sur /contact à la place de la carte Google Maps |
 
 ### Page d'accueil
 
@@ -373,7 +373,7 @@ Vérifié le 27/07/2026 contre le site rendu (`http://localhost:3002`).
 
 | Point | État | Où |
 |---|---|---|
-| Page conservée en l'état | ✅ | Aucune modification de structure |
+| Page conservée en l'état | ✅ | Structure conservée ; l'adresse et la carte Google Maps sont retirées à la demande de Nour (siège à son domicile), remplacées par sa carte de visite |
 | Accroche « Votre projet ? Notre mission. » | ✅ | `src/lib/site-content.ts` → `contactContent` |
 
 ### Décisions prises hors brief
@@ -387,12 +387,51 @@ Vérifié le 27/07/2026 contre le site rendu (`http://localhost:3002`).
 
 ---
 
-## Points à clarifier avec le client
+## Réponses de Nour (email du 21/09/2026)
 
-- **Carte de visite** : le fichier n'a pas été transmis. À récupérer (image ou PDF) pour
-  l'intégrer.
-- **Page Candidats** : le brief annonce « trois volets » mais n'en détaille que deux
-  (process de recrutement, pourquoi postuler). Le troisième volet est à définir.
-- **Phrase tronquée** dans le brief, section recrutement : « Collaborer avec BYS Consulting,
-  c'est une valeur sûre pour av… » — texte à compléter.
-- **Photos de l'équipe** pour la fin de la page À propos.
+Intégrées le 22/09/2026.
+
+| Point | Réponse | Où |
+|---|---|---|
+| Instance Nicoka | `bysconsulting` (https://bysconsulting.nicoka.com). Méthode iframe pour commencer, API plus tard si le référencement des offres devient un enjeu | `src/lib/nicoka.ts` (valeur par défaut du code) |
+| Chiffres | « 9 recrutements sur 10 pérennes » plutôt qu'un pourcentage ; délai « 2 à 4 semaines selon le besoin et l'urgence » | `faqContent` et `aboutContent.stats` dans `site-content.ts` |
+| Phrase tronquée du brief | Nour ne l'a pas retrouvée : abandonnée, rien n'est publié à sa place | |
+| Adresse postale | Ne pas la publier (siège au domicile) | Retirée du pied de page, de /contact, du JSON-LD et des pages légales |
+| Téléphone | 07 81 31 83 92 | `siteConfig.phone` / `phoneLink` |
+| Email | nour.boukhercha@bysconsulting.fr, à utiliser aussi pour le formulaire de contact | `siteConfig.email` ; `mailer.ts` envoie vers cette boîte |
+| Mentions légales | SAS au capital de 1 000 €, SIRET 942 988 015 00015, RCS Nanterre, TVA FR88942988015, directrice de la publication : Nour | `siteConfig.legal`, `/mentions-legales` |
+| Carte de visite | Reçue (bannière 1200×400 : nom, téléphone, logo) | `public/carte-de-visite.png` |
+| Cloudflare | Nour n'a pas eu la marche à suivre. Plus nécessaire : les images vivent sur le compte Cloudflare de l'agence (bucket `bys-consulting`, déjà branché sur Netlify) | |
+| Photos | Rapatriées depuis l'hébergeur temporaire i.ibb.co (800×800) | `public/equipe/` |
+
+### Décisions prises à l'intégration
+
+- **Garantie sur les recrutements** : Nour n'a pas confirmé la promesse « relance de la
+  mission sans honoraires » qui figurait dans la FAQ. La question est devenue « Que se passe-t-il
+  après la signature ? » et la réponse reprend uniquement ce que son brief décrit (suivi J+15 /
+  J+30 / J+90, coaching si besoin) et son chiffre de 9 sur 10. À remettre si elle le confirme.
+- **Formulaire de contact** : envoi réel par Resend depuis `BYS Consulting <contact@vbweb.fr>`
+  (domaine vbweb.fr vérifié) vers la boîte de Nour, réponse directe au visiteur. Le domaine
+  bysconsulting.fr est chez IONOS et n'est pas vérifié chez Resend ; si Nour veut un expéditeur
+  à son nom, il faudra soit ses accès SMTP IONOS (transport prévu dans `mailer.ts`), soit
+  ajouter les enregistrements DNS Resend sur son domaine.
+- **Domaine** : le vrai domaine est **bysconsulting.fr** (IONOS, même domaine que son email) ;
+  `bys-consulting.fr` utilisé jusque-là dans le code n'existe pas. Corrigé partout.
+- **JSON-LD** : plus de `LocalBusiness` (sans adresse, le type n'a pas de valeur) ; une
+  `Organization` avec email, téléphone, TVA et les deux profils LinkedIn.
+
+## Points encore ouverts
+
+- **Siège social dans les mentions légales** : la loi (LCEN, art. 6) demande l'adresse du siège
+  pour une société. Nour ne veut pas la publier et ne l'a pas transmise. À trancher avec elle
+  (une adresse de domiciliation est la solution habituelle).
+- **Bandeau rouge « Maquette de démonstration, propriété OUIBO »** : toujours affiché dans le
+  pied de page (`footer.tsx`). À retirer à la mise en ligne sur bysconsulting.fr.
+- **Domaine** : le site Netlify `nour-ouibo` n'a pas encore de domaine personnalisé ; il faut
+  l'accès à la zone DNS IONOS de bysconsulting.fr (ou une délégation) pour brancher
+  bysconsulting.fr et www.
+- **Offres Nicoka** : aucune offre publiée au 22/09/2026, l'iframe montre la candidature
+  spontanée. Remonter `HEIGHT` dans `nicoka-jobs.tsx` quand plusieurs offres seront en ligne.
+- **Page Candidats, troisième volet** : toujours « Les métiers sur lesquels nous recrutons »,
+  non validé explicitement.
+- **Témoignages** : aucun retour client réel transmis, la section reste retirée.

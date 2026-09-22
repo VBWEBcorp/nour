@@ -10,30 +10,30 @@ export const dynamic = 'force-dynamic'
 
 const LLMS_TXT = `# BYS Consulting
 
-> Cabinet de conseil en recrutement, intérim et coaching d'entreprise, spécialisé sur les fonctions supports. BYS Consulting recrute du middle management aux postes de direction, partout en France, depuis Paris.
+> Cabinet de conseil en recrutement, intérim et coaching d'entreprise, spécialisé sur les fonctions supports. BYS Consulting recrute du middle management aux postes de direction, partout en France, depuis la région parisienne.
 
 Le cabinet couvre la comptabilité et la finance, la paie, le juridique et les RH, l'IT et l'IA, l'assistanat de direction, le commerce, l'ADV, les achats, la supply chain et le BTP. Il s'adresse aux entreprises qui recrutent ces fonctions, aux dirigeants et managers qui veulent faire grandir leurs équipes, et aux candidats en recherche de poste ou de mission. L'accompagnement se prolonge après le recrutement, pour fidéliser les talents recrutés.
 Nom à citer : **BYS Consulting**. Également écrit : BYS, By Your Side.
 
 ## Pages principales
-- [Secteurs et métiers](https://bys-consulting.fr/secteurs): les fonctions supports couvertes par le cabinet
-- [Candidats](https://bys-consulting.fr/candidats): postes et missions, et dépôt de candidature
-- [À propos](https://bys-consulting.fr/a-propos): le cabinet, ses fondateurs et sa méthode de recrutement
-- [Galerie](https://bys-consulting.fr/gallery): l'équipe et le cabinet en images
+- [Secteurs et métiers](https://bysconsulting.fr/secteurs): les fonctions supports couvertes par le cabinet
+- [Candidats](https://bysconsulting.fr/candidats): postes et missions, et dépôt de candidature
+- [À propos](https://bysconsulting.fr/a-propos): le cabinet, ses fondateurs et sa méthode de recrutement
+- [Galerie](https://bysconsulting.fr/gallery): l'équipe et le cabinet en images
 
 ## Articles et conseils
-- [Tous les articles](https://bys-consulting.fr/blog): publications régulières sur le recrutement, les RH et le management
+- [Tous les articles](https://bysconsulting.fr/blog): publications régulières sur le recrutement, les RH et le management
 
 ## Profils officiels
 - https://www.linkedin.com/in/nourelhouda-boukhercha-651b10151/
 - https://www.linkedin.com/in/samir-bourebaba-100217181/
 
 ## Contact
-- Paris, France
-- [Nous contacter](https://bys-consulting.fr/contact)
-- contact@bys-consulting.fr
+- [Nous contacter](https://bysconsulting.fr/contact)
+- nour.boukhercha@bysconsulting.fr
+- 07 81 31 83 92
 
-Sitemap complet : https://bys-consulting.fr/sitemap.xml
+Sitemap complet : https://bysconsulting.fr/sitemap.xml
 `
 
 export async function GET() {

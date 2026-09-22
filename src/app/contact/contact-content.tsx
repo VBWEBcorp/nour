@@ -1,7 +1,8 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { CheckCircle2, Clock, Mail, MapPin, Phone, Send } from 'lucide-react'
+import { CheckCircle2, Clock, Mail, Phone, Send } from 'lucide-react'
+import Image from 'next/image'
 import { useState } from 'react'
 
 import { PremiumHero } from '@/components/sections/premium-hero'
@@ -16,12 +17,11 @@ const ease = [0.22, 1, 0.36, 1] as const
 
 const defaults = {
   hero: { ...contactContent.hero, image: '' as string },
+  // Pas d'adresse postale : le siège est au domicile de la fondatrice, elle a
+  // demandé qu'il n'apparaisse pas sur le site (email du 21/09/2026).
   info: {
     phone: siteConfig.phone,
     email: siteConfig.email,
-    street: siteConfig.address.street,
-    postalCode: siteConfig.address.postalCode,
-    city: siteConfig.address.city,
   },
 }
 
@@ -68,16 +68,12 @@ export function ContactContent() {
     }
   }
 
-  const phone = info.phone || siteConfig.phone
-  const email = info.email || siteConfig.email
-  const street = info.street || siteConfig.address.street
-  const postalCode = info.postalCode || siteConfig.address.postalCode
-  const city = info.city || siteConfig.address.city
-
-  const fullAddress = `${street}, ${postalCode} ${city}`
-  const mapQuery = encodeURIComponent(fullAddress)
-  const mapEmbedSrc = `https://www.google.com/maps?q=${mapQuery}&hl=fr&z=15&output=embed`
-  const mapLink = `https://www.google.com/maps/search/?api=1&query=${mapQuery}`
+  const phone: string = info.phone || siteConfig.phone
+  const email: string = info.email || siteConfig.email
+  // Le lien tel: attend un numéro sans espaces ; le numéro par défaut est déjà
+  // au format international dans la config.
+  const phoneHref =
+    phone === siteConfig.phone ? siteConfig.phoneLink : `tel:${phone.replace(/\s+/g, '')}`
 
   return (
     <>
@@ -282,7 +278,7 @@ export function ContactContent() {
                   </h2>
 
                   <a
-                    href={`tel:${phone}`}
+                    href={phoneHref}
                     className="group flex items-start gap-4 -mx-3 rounded-xl px-3 py-2 transition-colors hover:bg-foreground/[0.04]"
                   >
                     <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-primary/15 to-primary/5 text-primary ring-1 ring-primary/20 transition-transform duration-300 group-hover:scale-105">
@@ -307,20 +303,6 @@ export function ContactContent() {
                     </div>
                   </a>
 
-                  <div className="flex items-start gap-4 -mx-3 rounded-xl px-3 py-2">
-                    <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-primary/15 to-primary/5 text-primary ring-1 ring-primary/20">
-                      <MapPin className="size-4" aria-hidden />
-                    </span>
-                    <div>
-                      <p className="text-xs font-medium text-muted-foreground">Adresse</p>
-                      <p className="text-sm font-semibold text-foreground">
-                        {street}
-                        <br />
-                        {postalCode} {city}
-                      </p>
-                    </div>
-                  </div>
-
                   <div className="border-t border-border/60 pt-5">
                     <div className="flex items-center gap-2">
                       <span
@@ -339,8 +321,13 @@ export function ContactContent() {
                 </div>
               </div>
 
-              {/* Carte Google Maps */}
-              <div className="group relative overflow-hidden rounded-3xl shadow-[0_10px_30px_-12px_oklch(0.24_0.03_258/0.18)]">
+              {/* Carte de visite transmise par Nour (remplace la carte Google Maps :
+                  aucune adresse n'est publiée) */}
+              <a
+                href={phoneHref}
+                aria-label={`Appeler ${siteConfig.name} au ${phone}`}
+                className="group relative block overflow-hidden rounded-3xl shadow-[0_10px_30px_-12px_oklch(0.24_0.03_258/0.18)] transition-shadow hover:shadow-[0_16px_40px_-12px_oklch(0.24_0.03_258/0.28)]"
+              >
                 <div
                   className="pointer-events-none absolute inset-0 z-10 rounded-3xl p-px"
                   aria-hidden
@@ -353,27 +340,15 @@ export function ContactContent() {
                     maskComposite: 'exclude',
                   }}
                 />
-
-                <iframe
-                  title={`Localisation BYS Consulting — ${fullAddress}`}
-                  src={mapEmbedSrc}
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  allowFullScreen
-                  className="block h-64 w-full border-0 grayscale-[0.2] transition-all duration-500 group-hover:grayscale-0"
+                <Image
+                  src="/carte-de-visite.png"
+                  alt={`Carte de visite de Nour Boukhercha, ${siteConfig.name} : ${phone}`}
+                  width={1200}
+                  height={400}
+                  sizes="(min-width: 1024px) 420px, 100vw"
+                  className="block h-auto w-full transition-transform duration-500 group-hover:scale-[1.01]"
                 />
-
-                {/* Lien overlay vers Google Maps */}
-                <a
-                  href={mapLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="absolute bottom-3 right-3 z-20 inline-flex items-center gap-1.5 rounded-full bg-background/90 px-3 py-1.5 text-xs font-semibold text-foreground shadow-sm ring-1 ring-border/60 backdrop-blur-sm transition-colors hover:text-primary"
-                >
-                  <MapPin className="size-3.5 text-primary" aria-hidden />
-                  Ouvrir dans Google Maps
-                </a>
-              </div>
+              </a>
             </motion.div>
           </div>
         </div>

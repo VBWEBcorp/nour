@@ -42,7 +42,7 @@ export default function LegalPage() {
             Mentions légales
           </h1>
           <p className="mt-4 text-sm text-muted-foreground">
-            Dernière mise à jour : [JJ/MM/AAAA]
+            Dernière mise à jour : 22/09/2026
           </p>
 
           <article className="mt-10 space-y-10 text-sm leading-relaxed text-muted-foreground [&_h2]:font-display [&_h2]:text-lg [&_h2]:font-semibold [&_h2]:text-foreground [&_h3]:text-sm [&_h3]:font-semibold [&_h3]:text-foreground">
@@ -54,20 +54,15 @@ export default function LegalPage() {
               </p>
               <ul className="list-inside list-disc space-y-1 pl-1">
                 <li><strong>Raison sociale :</strong> {siteConfig.name}</li>
-                <li><strong>Forme juridique :</strong> [SARL / SAS / EI / Auto-entrepreneur - à compléter]</li>
-                <li><strong>Capital social :</strong> [Montant] € (si applicable)</li>
-                <li><strong>SIRET :</strong> [N° SIRET à compléter]</li>
-                <li><strong>RCS :</strong> [Ville] B [N° RCS] (si applicable)</li>
-                <li><strong>N° TVA intracommunautaire :</strong> [FR XX XXXXXXXXX - à compléter]</li>
-                <li>
-                  <strong>Siège social :</strong> {siteConfig.address.street},{' '}
-                  {siteConfig.address.postalCode} {siteConfig.address.city}
-                </li>
-                <li><strong>Téléphone :</strong> {siteConfig.phone}</li>
-                <li><strong>Email :</strong> {siteConfig.email}</li>
+                <li><strong>Forme juridique :</strong> {siteConfig.legal.legalForm} au capital social de {siteConfig.legal.capital}</li>
+                <li><strong>SIRET :</strong> {siteConfig.legal.siret}</li>
+                <li><strong>Immatriculation :</strong> {siteConfig.legal.rcs}</li>
+                <li><strong>N° TVA intracommunautaire :</strong> {siteConfig.legal.vat}</li>
+                <li><strong>Téléphone :</strong> <a href={siteConfig.phoneLink} className="font-medium text-primary underline underline-offset-4 hover:text-primary/80">{siteConfig.phone}</a></li>
+                <li><strong>Email :</strong> <a href={`mailto:${siteConfig.email}`} className="font-medium text-primary underline underline-offset-4 hover:text-primary/80">{siteConfig.email}</a></li>
               </ul>
               <p>
-                <strong>Directeur de la publication :</strong> [Nom et prénom du responsable - à compléter]
+                <strong>Directrice de la publication :</strong> {siteConfig.legal.publisher}, Présidente
               </p>
             </section>
 
@@ -75,9 +70,19 @@ export default function LegalPage() {
               <h2>2. Hébergement</h2>
               <p>Le site est hébergé par :</p>
               <ul className="list-inside list-disc space-y-1 pl-1">
-                <li><strong>Raison sociale :</strong> [Vercel Inc. / OVHcloud / autre - à compléter]</li>
-                <li><strong>Adresse :</strong> [Adresse de l&apos;hébergeur]</li>
-                <li><strong>Site web :</strong> [URL de l&apos;hébergeur]</li>
+                <li><strong>Raison sociale :</strong> Netlify, Inc.</li>
+                <li><strong>Adresse :</strong> 512 2nd Street, Suite 200, San Francisco, CA 94107, États-Unis</li>
+                <li>
+                  <strong>Site web :</strong>{' '}
+                  <a
+                    href="https://www.netlify.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-medium text-primary underline underline-offset-4 hover:text-primary/80"
+                  >
+                    www.netlify.com
+                  </a>
+                </li>
               </ul>
               <h3 className="pt-2">Services techniques complémentaires</h3>
               <ul className="list-inside list-disc space-y-1 pl-1">
@@ -187,33 +192,38 @@ export default function LegalPage() {
                 Les présentes mentions légales sont régies par le droit français.
                 En cas de litige, et après l&apos;échec de toute tentative de
                 résolution amiable dans un délai de 30 jours, les tribunaux
-                compétents du ressort de [Ville - à compléter] seront seuls
-                compétents.
+                compétents du ressort de Nanterre seront seuls compétents.
               </p>
               <p>
-                Conformément à l&apos;article L.612-1 du Code de la consommation,
-                le consommateur a le droit de recourir gratuitement à un médiateur
-                de la consommation. Médiateur : [Nom et coordonnées du médiateur - à compléter].
-              </p>
-              <p>
-                Plateforme de règlement en ligne des litiges de la Commission européenne :{' '}
+                Les services de {siteConfig.name} s&apos;adressent à des professionnels.
+                Si vous êtes un consommateur au sens du Code de la consommation, vous
+                pouvez recourir gratuitement à un médiateur de la consommation ou à la{' '}
                 <a
                   href="https://ec.europa.eu/consumers/odr"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="font-medium text-primary underline underline-offset-4 hover:text-primary/80"
                 >
-                  https://ec.europa.eu/consumers/odr
-                </a>
+                  plateforme européenne de règlement en ligne des litiges
+                </a>.
               </p>
             </section>
 
             <section className="space-y-3">
               <h2>9. Crédits</h2>
               <ul className="list-inside list-disc space-y-1 pl-1">
-                <li><strong>Conception et développement :</strong> [À compléter]</li>
-                <li><strong>Design :</strong> [À compléter]</li>
-                <li><strong>Crédits photos :</strong> [À compléter - ex: Unsplash, photographe, etc.]</li>
+                <li>
+                  <strong>Conception, design et développement :</strong>{' '}
+                  <a
+                    href="https://vbweb.fr"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-medium text-primary underline underline-offset-4 hover:text-primary/80"
+                  >
+                    VBWEB
+                  </a>
+                </li>
+                <li><strong>Crédits photos :</strong> BYS Consulting (portraits de l&apos;équipe), Unsplash (visuels d&apos;illustration)</li>
                 <li><strong>Icônes :</strong> Lucide Icons (licence ISC)</li>
                 <li><strong>Polices :</strong> Inter et Plus Jakarta Sans (Google Fonts, licence Open Font)</li>
               </ul>

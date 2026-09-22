@@ -127,7 +127,7 @@ function EditorialBlock({
               ))}
             </ol>
             <p className="mt-4 font-serif text-sm italic text-muted-foreground/80">
-              — {item.source}
+              Source : {item.source}
             </p>
           </div>
 

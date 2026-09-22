@@ -11,11 +11,12 @@ const ease = [0.22, 1, 0.36, 1] as const
  * Offres d'emploi servies par Nicoka, intégrées en iframe (`jobOnly=1`).
  *
  * L'iframe est cross-domain : le navigateur ne nous laisse pas lire la hauteur
- * réelle du contenu, on fixe donc une hauteur généreuse et l'iframe défile en
- * interne si les offres dépassent. Ajuster `HEIGHT` une fois le volume réel
- * d'offres connu.
+ * réelle du contenu, on fixe donc une hauteur et l'iframe défile en interne si
+ * les offres dépassent. Au 22/09/2026 l'instance n'a aucune offre publiée : la
+ * page montre la candidature spontanée et un message d'accueil. Remonter
+ * `HEIGHT` quand plusieurs offres seront en ligne.
  */
-const HEIGHT = 1500
+const HEIGHT = 1100
 
 export function NicokaJobs() {
   return (
@@ -37,7 +38,8 @@ export function NicokaJobs() {
           <p className="mt-5 text-base leading-relaxed text-muted-foreground sm:text-[17px]">
             Retrouvez ici l&apos;ensemble des postes que nous recrutons
             actuellement. Les candidatures se font directement depuis chaque
-            offre.
+            offre, et vous pouvez aussi nous adresser une candidature
+            spontanée.
           </p>
         </motion.div>
 

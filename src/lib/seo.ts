@@ -1,19 +1,24 @@
 export const siteConfig = {
   name: 'BYS Consulting',
-  url: 'https://bys-consulting.fr',
+  url: 'https://bysconsulting.fr',
   locale: 'fr_FR',
   description:
     "BYS Consulting. Recrutement, Conseil RH & Coaching d'entreprise. Nous accompagnons les entreprises dans le recrutement de leurs fonctions supports et le développement de leurs managers. By Your Side, à chaque étape clé.",
-  ogImage: 'https://www.example.com/og.png',
+  ogImage: 'https://bysconsulting.fr/logo.png',
   twitterHandle: '@bysconsulting',
-  themeColor: '#1d4ed8',
-  phone: '+33 6 12 34 56 78',
-  email: 'contact@bys-consulting.fr',
-  address: {
-    street: '12 Rue de la Performance',
-    city: 'Paris',
-    postalCode: '75008',
-    country: 'FR',
+  themeColor: '#0a182d',
+  // Coordonnées transmises par Nour le 21/09/2026. Le siège social est à son
+  // domicile : à sa demande, aucune adresse postale n'apparaît sur le site.
+  phone: '07 81 31 83 92',
+  phoneLink: 'tel:+33781318392',
+  email: 'nour.boukhercha@bysconsulting.fr',
+  legal: {
+    legalForm: 'SAS',
+    capital: '1 000 €',
+    siret: '942 988 015 00015',
+    rcs: 'RCS Nanterre 942 988 015',
+    vat: 'FR88942988015',
+    publisher: 'Nourelhouda Boukhercha',
   },
 } as const
 

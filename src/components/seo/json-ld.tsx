@@ -1,38 +1,30 @@
 import { siteConfig } from '@/lib/seo'
 
+// Pas de LocalBusiness : le siège est au domicile de la fondatrice et aucune
+// adresse postale n'est publiée, or ce type n'a de valeur qu'avec une adresse.
 export function organizationJsonLd() {
   return {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: siteConfig.name,
+    alternateName: 'By Your Side Consulting',
     url: siteConfig.url,
-    logo: `${siteConfig.url}/favicon.svg`,
+    logo: `${siteConfig.url}/logo.png`,
+    email: siteConfig.email,
+    telephone: '+33781318392',
+    vatID: siteConfig.legal.vat,
+    areaServed: 'FR',
     contactPoint: {
       '@type': 'ContactPoint',
-      telephone: siteConfig.phone,
+      telephone: '+33781318392',
+      email: siteConfig.email,
       contactType: 'customer service',
       availableLanguage: 'French',
     },
-    sameAs: [] as string[],
-  }
-}
-
-export function localBusinessJsonLd() {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'LocalBusiness',
-    name: siteConfig.name,
-    url: siteConfig.url,
-    telephone: siteConfig.phone,
-    email: siteConfig.email,
-    image: siteConfig.ogImage,
-    address: {
-      '@type': 'PostalAddress',
-      streetAddress: siteConfig.address.street,
-      addressLocality: siteConfig.address.city,
-      postalCode: siteConfig.address.postalCode,
-      addressCountry: siteConfig.address.country,
-    },
+    sameAs: [
+      'https://www.linkedin.com/in/nourelhouda-boukhercha-651b10151/',
+      'https://www.linkedin.com/in/samir-bourebaba-100217181/',
+    ],
   }
 }
 

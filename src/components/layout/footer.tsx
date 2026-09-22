@@ -29,7 +29,7 @@ export function Footer() {
           <div className="space-y-4">
             <Link
               href="/"
-              aria-label="BYS Consulting — Accueil"
+              aria-label="BYS Consulting, retour à l'accueil"
               className="inline-flex"
             >
               <Image
@@ -106,16 +106,11 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href={`tel:${siteConfig.phone}`}
+                  href={siteConfig.phoneLink}
                   className="text-zinc-300 transition-colors hover:text-white"
                 >
                   {siteConfig.phone}
                 </a>
-              </li>
-              <li className="text-zinc-500">
-                {siteConfig.address.street}
-                <br />
-                {siteConfig.address.postalCode} {siteConfig.address.city}
               </li>
             </ul>
           </div>

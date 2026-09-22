@@ -8,7 +8,6 @@ import { ProcessTimeline } from '@/components/home/process-timeline'
 import { WhyBys } from '@/components/home/why-bys'
 import { FaqSection } from '@/components/sections/faq-section'
 import {
-  localBusinessJsonLd,
   organizationJsonLd,
   webPageJsonLd,
   webSiteJsonLd,
@@ -24,7 +23,6 @@ const jsonLd = {
   '@graph': [
     webSiteJsonLd(),
     organizationJsonLd(),
-    localBusinessJsonLd(),
     webPageJsonLd(siteConfig.name, siteConfig.description, '/'),
   ],
 }

@@ -42,7 +42,7 @@ export default function CGUPage() {
             Conditions générales d&apos;utilisation
           </h1>
           <p className="mt-4 text-sm text-muted-foreground">
-            Dernière mise à jour : [JJ/MM/AAAA]
+            Dernière mise à jour : 22/09/2026
           </p>
 
           <article className="mt-10 space-y-10 text-sm leading-relaxed text-muted-foreground [&_h2]:font-display [&_h2]:text-lg [&_h2]:font-semibold [&_h2]:text-foreground [&_h3]:text-sm [&_h3]:font-semibold [&_h3]:text-foreground">
@@ -210,7 +210,7 @@ export default function CGUPage() {
                 Les présentes CGU sont régies par le droit français. En cas de litige relatif
                 à l&apos;interprétation ou l&apos;exécution des présentes, les parties s&apos;engagent à
                 rechercher une solution amiable. À défaut, le litige sera porté devant les
-                tribunaux compétents du ressort de [Ville - à compléter].
+                tribunaux compétents du ressort de Nanterre.
               </p>
             </section>
 
