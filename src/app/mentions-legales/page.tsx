@@ -57,6 +57,7 @@ export default function LegalPage() {
                 <li><strong>Forme juridique :</strong> {siteConfig.legal.legalForm} au capital social de {siteConfig.legal.capital}</li>
                 <li><strong>SIRET :</strong> {siteConfig.legal.siret}</li>
                 <li><strong>Immatriculation :</strong> {siteConfig.legal.rcs}</li>
+                <li><strong>Siège social :</strong> {siteConfig.legal.seat} (adresse complète au registre du commerce)</li>
                 <li><strong>N° TVA intracommunautaire :</strong> {siteConfig.legal.vat}</li>
                 <li><strong>Téléphone :</strong> <a href={siteConfig.phoneLink} className="font-medium text-primary underline underline-offset-4 hover:text-primary/80">{siteConfig.phone}</a></li>
                 <li><strong>Email :</strong> <a href={`mailto:${siteConfig.email}`} className="font-medium text-primary underline underline-offset-4 hover:text-primary/80">{siteConfig.email}</a></li>

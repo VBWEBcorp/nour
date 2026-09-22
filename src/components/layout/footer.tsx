@@ -129,28 +129,6 @@ export function Footer() {
           </p>
         </div>
       </div>
-
-      {/* Bandeau de protection — mention anti-reproduction (propriété OUIBO) */}
-      <div className="bg-red-600 text-white">
-        <div className="mx-auto max-w-6xl px-4 py-4 text-center sm:px-6 lg:px-8">
-          <p className="text-sm font-bold uppercase tracking-wide">
-            Maquette de démonstration. Propriété exclusive de{' '}
-            <a
-              href="https://ouibo.fr"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline underline-offset-2 transition-opacity hover:opacity-80"
-            >
-              OUIBO.FR
-            </a>
-          </p>
-          <p className="mt-1 text-xs leading-relaxed text-white/90">
-            Ce site est une présentation à but de démonstration uniquement. Toute reproduction,
-            exploitation ou utilisation à des fins professionnelles ou commerciales est strictement
-            interdite.
-          </p>
-        </div>
-      </div>
     </footer>
   )
 }

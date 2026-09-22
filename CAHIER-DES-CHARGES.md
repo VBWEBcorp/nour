@@ -422,14 +422,13 @@ Intégrées le 22/09/2026.
 
 ## Points encore ouverts
 
-- **Siège social dans les mentions légales** : la loi (LCEN, art. 6) demande l'adresse du siège
-  pour une société. Nour ne veut pas la publier et ne l'a pas transmise. À trancher avec elle
-  (une adresse de domiciliation est la solution habituelle).
-- **Bandeau rouge « Maquette de démonstration, propriété OUIBO »** : toujours affiché dans le
-  pied de page (`footer.tsx`). À retirer à la mise en ligne sur bysconsulting.fr.
-- **Domaine** : le site Netlify `nour-ouibo` n'a pas encore de domaine personnalisé ; il faut
-  l'accès à la zone DNS IONOS de bysconsulting.fr (ou une délégation) pour brancher
-  bysconsulting.fr et www.
+- **Siège social** : réglé le 22/09/2026 en indiquant la commune seule, telle qu'au registre
+  public (Châtenay-Malabry, 92), avec renvoi au RCS pour l'adresse complète. La rue reste
+  privée (domicile de Nour).
+- **Bandeau rouge « Maquette de démonstration »** : retiré le 22/09/2026 avec l'accord de Victor.
+- **Domaine** : bysconsulting.fr est chez IONOS (zone gérée par Nour). Le domaine est déclaré
+  sur le site Netlify ; il reste à Nour d'ajouter chez IONOS les enregistrements DNS indiqués
+  dans l'email de réponse (A sur l'apex vers Netlify, CNAME www vers nour-ouibo.netlify.app).
 - **Offres Nicoka** : aucune offre publiée au 22/09/2026, l'iframe montre la candidature
   spontanée. Remonter `HEIGHT` dans `nicoka-jobs.tsx` quand plusieurs offres seront en ligne.
 - **Page Candidats, troisième volet** : toujours « Les métiers sur lesquels nous recrutons »,

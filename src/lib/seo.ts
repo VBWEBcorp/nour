@@ -17,6 +17,8 @@ export const siteConfig = {
     capital: '1 000 €',
     siret: '942 988 015 00015',
     rcs: 'RCS Nanterre 942 988 015',
+    // Commune du siège telle qu'au registre public ; la rue reste privée (domicile).
+    seat: 'Châtenay-Malabry (92)',
     vat: 'FR88942988015',
     publisher: 'Nourelhouda Boukhercha',
   },
