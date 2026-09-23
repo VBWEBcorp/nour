@@ -8,7 +8,7 @@ import { images } from '@/lib/site-content'
 import { jobFamilies } from '@/lib/bys-content'
 
 const description =
-  "Comptabilité & finance, paie, juridique & RH, IT & IA, assistanat de direction, commerce, ADV, achats, supply chain, BTP : découvrez les métiers sur lesquels BYS Consulting recrute et accompagne."
+  "Comptabilité & finance, paie, juridique & RH, IT & IA, assistanat de direction, commerce & ADV, achats, supply chain : découvrez les métiers sur lesquels BYS Consulting recrute et accompagne."
 
 export const metadata: Metadata = {
   title: 'Secteurs & métiers',

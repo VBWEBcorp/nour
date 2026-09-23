@@ -38,8 +38,7 @@ export function HomeCta() {
             </h2>
             <p className="mx-auto mt-5 max-w-xl text-pretty text-base leading-relaxed text-white/80 sm:text-lg">
               Échangeons sans engagement. Nous vous proposerons l&apos;approche la
-              plus adaptée : recrutement, intérim, coaching ou la bonne
-              combinaison des trois.
+              plus adaptée : la bonne combinaison du recrutement au coaching.
             </p>
 
             <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">

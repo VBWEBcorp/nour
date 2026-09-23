@@ -227,7 +227,7 @@ export const aboutContent = {
     eyebrow: 'Qui sommes-nous',
     title: 'Deux expertises, une conviction commune : l\'humain fait la performance',
     description:
-      "BYS Consulting est né de la rencontre de Nourelhouda Boukhercha et Samir Bourebaba. Deux parcours, une vision partagée : recruter, accompagner et faire grandir les talents qui transforment les organisations.",
+      "BYS Consulting est né de la rencontre d'une chasseuse de tête et d'un coach professionnel.",
     image: images.aboutHero,
   },
   stats: [

@@ -12,7 +12,7 @@ const LLMS_TXT = `# BYS Consulting
 
 > Cabinet de conseil en recrutement, intérim et coaching d'entreprise, spécialisé sur les fonctions supports. BYS Consulting recrute du middle management aux postes de direction, partout en France, depuis la région parisienne.
 
-Le cabinet couvre la comptabilité et la finance, la paie, le juridique et les RH, l'IT et l'IA, l'assistanat de direction, le commerce, l'ADV, les achats, la supply chain et le BTP. Il s'adresse aux entreprises qui recrutent ces fonctions, aux dirigeants et managers qui veulent faire grandir leurs équipes, et aux candidats en recherche de poste ou de mission. L'accompagnement se prolonge après le recrutement, pour fidéliser les talents recrutés.
+Le cabinet couvre la comptabilité et la finance, la paie, le juridique et les RH, l'IT et l'IA, l'assistanat de direction, le commerce et l'ADV, les achats et la supply chain. Il s'adresse aux entreprises qui recrutent ces fonctions, aux dirigeants et managers qui veulent faire grandir leurs équipes, et aux candidats en recherche de poste ou de mission. L'accompagnement se prolonge après le recrutement, pour fidéliser les talents recrutés.
 Nom à citer : **BYS Consulting**. Également écrit : BYS, By Your Side.
 
 ## Pages principales

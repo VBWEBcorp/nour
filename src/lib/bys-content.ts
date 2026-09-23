@@ -202,16 +202,10 @@ export const sectors = [
       'Office manager, assistant(e) de direction, executive assistant.',
   },
   {
-    iconName: 'PackageCheck',
-    title: 'ADV',
-    description:
-      "Responsable ADV, gestionnaire administration des ventes, back-office.",
-  },
-  {
     iconName: 'Handshake',
-    title: 'Commerce',
+    title: 'Commerce & ADV',
     description:
-      'Directeur commercial, business developer, key account, ingénieur d’affaires.',
+      'Directeur commercial, business developer, key account, responsable ADV, back-office.',
   },
   {
     iconName: 'Truck',
@@ -224,12 +218,6 @@ export const sectors = [
     title: 'Achats',
     description:
       'Directeur achats, acheteur, category manager, sourcing manager.',
-  },
-  {
-    iconName: 'HardHat',
-    title: 'BTP',
-    description:
-      "Conducteur de travaux, ingénieur, responsable d'affaires, chef de chantier.",
   },
 ] as const
 
@@ -460,19 +448,13 @@ export const jobFamilies = [
   },
   {
     iconName: 'Handshake',
-    title: 'Assistanat Commercial & Commerce',
+    title: 'Assistanat Commercial, Commerce & ADV',
     jobs: [
       'Assistante Commerciale',
       'Chargé(e) de Clientèle BtoB/BtoC',
       'Assistant(e) Import-Export',
       'Technico-Commercial(e)',
       'Analyste Commercial(e)',
-    ],
-  },
-  {
-    iconName: 'ClipboardCheck',
-    title: 'Administration des Ventes (ADV)',
-    jobs: [
       'Assistant(e) ADV',
       'Gestionnaire ADV',
       'Coordinateur(trice) ADV',
@@ -498,17 +480,6 @@ export const jobFamilies = [
       "Responsable d'Exploitation",
       'Supply Chain Manager',
       'Responsable E-commerce / Logistique Omnicanale',
-    ],
-  },
-  {
-    iconName: 'HardHat',
-    title: 'BTP',
-    jobs: [
-      'Dessinateur',
-      'Chef de Chantier',
-      "Chargé d'Affaires",
-      'Conducteur de Travaux',
-      'Ingénieur Travaux',
     ],
   },
 ] as const

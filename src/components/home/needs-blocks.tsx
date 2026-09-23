@@ -105,7 +105,7 @@ export function NeedsBlocks() {
           </p>
           <h2 className="mt-4 text-balance font-display text-3xl leading-[1.12] tracking-[-0.02em] text-foreground sm:text-4xl md:text-[2.6rem]">
             BYS Consulting, ce n&apos;est pas un simple cabinet de recrutement,
-            c&apos;est un réel{' '}
+            c&apos;est votre{' '}
             <span className="font-serif italic font-normal text-primary">
               partenaire de croissance
             </span>
