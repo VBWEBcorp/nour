@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
 import { blogPosts, blogSettings } from '@/data/blog-posts'
-import { siteConfig } from '@/lib/seo'
+import { defaultOgImage, siteConfig } from '@/lib/seo'
 import BlogPageContent from './blog-page-content'
 
 export const metadata: Metadata = {
@@ -14,13 +14,13 @@ export const metadata: Metadata = {
     url: `${siteConfig.url}/blog`,
     siteName: siteConfig.name,
     locale: siteConfig.locale,
-    images: blogSettings.heroImage ? [{ url: blogSettings.heroImage }] : [],
+    images: blogSettings.heroImage ? [{ url: blogSettings.heroImage }] : [defaultOgImage],
   },
   twitter: {
     card: 'summary_large_image',
     title: blogSettings.title,
     description: blogSettings.description,
-    images: blogSettings.heroImage ? [blogSettings.heroImage] : [],
+    images: blogSettings.heroImage ? [blogSettings.heroImage] : [defaultOgImage.url],
   },
   alternates: { canonical: '/blog' },
 }

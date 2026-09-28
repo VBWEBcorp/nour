@@ -4,7 +4,7 @@ export const siteConfig = {
   locale: 'fr_FR',
   description:
     "BYS Consulting. Recrutement, Conseil RH & Coaching d'entreprise. Nous accompagnons les entreprises dans le recrutement de leurs fonctions supports et le développement de leurs managers. By Your Side, à chaque étape clé.",
-  ogImage: 'https://bysconsulting.fr/logo.png',
+  ogImage: 'https://bysconsulting.fr/og.png',
   twitterHandle: '@bysconsulting',
   themeColor: '#0a182d',
   // Coordonnées transmises par Nour le 21/09/2026. Le siège social est à son
@@ -23,6 +23,15 @@ export const siteConfig = {
     publisher: 'Nourelhouda Boukhercha',
   },
 } as const
+
+// Image de partage par défaut (1200x630). Next fusionne openGraph en surface :
+// toute page qui redéfinit openGraph doit reprendre cette image, sinon elle la perd.
+export const defaultOgImage = {
+  url: siteConfig.ogImage,
+  width: 1200,
+  height: 630,
+  alt: siteConfig.name,
+}
 
 export type SeoMeta = {
   title?: string

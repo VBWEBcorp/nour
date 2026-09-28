@@ -3,7 +3,7 @@ import { Inter, Instrument_Serif, JetBrains_Mono, Plus_Jakarta_Sans } from 'next
 
 import { RootWrapper } from '@/components/layout/root-wrapper'
 import { ThemeScript } from '@/components/theme/theme-script'
-import { siteConfig } from '@/lib/seo'
+import { defaultOgImage, siteConfig } from '@/lib/seo'
 
 import '../index.css'
 
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
     title: siteConfig.name,
     description: siteConfig.description,
-    images: [{ url: siteConfig.ogImage }],
+    images: [defaultOgImage],
   },
   twitter: {
     card: 'summary_large_image',
@@ -66,10 +66,6 @@ export const metadata: Metadata = {
     'max-image-preview': 'large',
     'max-snippet': -1,
     'max-video-preview': -1,
-  },
-  icons: {
-    icon: '/favicon.svg',
-    apple: '/apple-touch-icon.png',
   },
   alternates: {
     canonical: '/',

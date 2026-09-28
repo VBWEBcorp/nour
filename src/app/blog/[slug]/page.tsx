@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
 import { blogPosts } from '@/data/blog-posts'
-import { siteConfig } from '@/lib/seo'
+import { defaultOgImage, siteConfig } from '@/lib/seo'
 import BlogPostContent from './blog-post-content'
 
 type Params = Promise<{ slug: string }>
@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
       url,
       siteName: siteConfig.name,
       locale: siteConfig.locale,
-      images: post.coverImage ? [{ url: post.coverImage, width: 1200, height: 630, alt: title }] : [],
+      images: post.coverImage ? [{ url: post.coverImage, width: 1200, height: 630, alt: title }] : [defaultOgImage],
       publishedTime: post.publishedAt,
       authors: post.author ? [post.author] : [],
       tags: post.tags || [],
@@ -40,7 +40,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
       card: 'summary_large_image',
       title,
       description,
-      images: post.coverImage ? [post.coverImage] : [],
+      images: post.coverImage ? [post.coverImage] : [defaultOgImage.url],
     },
     alternates: { canonical: `/blog/${post.slug}` },
   }
