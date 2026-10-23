@@ -1,25 +1,28 @@
 'use client'
 
 import { AnimatePresence, motion } from 'framer-motion'
-import { ArrowRight, CheckCircle2, MapPin, Paperclip, Send, Upload, X } from 'lucide-react'
+import { ArrowRight, CheckCircle2, Paperclip, Send, Upload, X } from 'lucide-react'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
 import { JobFamilies } from '@/components/sections/job-families'
-import { NicokaJobs } from '@/components/sections/nicoka-jobs'
 import { PageHero } from '@/components/sections/page-hero'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { candidateProcess, whyApply } from '@/lib/bys-content'
 import { getIcon } from '@/lib/icons'
-import { nicokaEnabled } from '@/lib/nicoka'
 import { candidatesContent } from '@/lib/site-content'
 import { cn } from '@/lib/utils'
 
 const ease = [0.22, 1, 0.36, 1] as const
 
-type Offer = (typeof candidatesContent.offers.items)[number]
+type Offer = Pick<(typeof candidatesContent.offers.items)[number], 'title' | 'company'>
+
+const SPONTANEOUS: Offer = { title: 'Candidature spontanée', company: 'BYS Consulting' }
+
+/** Netlify refuse une requête de plus de 6 Mo : on bloque avant, avec un message clair. */
+const MAX_TOTAL = 5.5 * 1024 * 1024
 
 /* ------------------------------------------------------------------ */
 /*  Modale de candidature (formulaire + upload CV / lettre)           */
@@ -100,9 +103,13 @@ function ApplicationModal({
                   Candidature envoyée&nbsp;!
                 </h2>
                 <p className="mx-auto mt-2 max-w-xs text-sm text-muted-foreground">
-                  Merci, nous avons bien reçu votre candidature pour{' '}
-                  <span className="font-medium text-foreground">{offer.title}</span>.
-                  Nous revenons vers vous rapidement.
+                  Merci, nous avons bien reçu votre candidature
+                  {offer !== SPONTANEOUS && (
+                    <>
+                      {' '}pour <span className="font-medium text-foreground">{offer.title}</span>
+                    </>
+                  )}
+                  . Nous revenons vers vous rapidement.
                 </p>
                 <Button onClick={onClose} className="mt-6">
                   Fermer
@@ -126,6 +133,14 @@ function ApplicationModal({
                     e.preventDefault()
                     if (!offer) return
                     const fd = new FormData(e.currentTarget)
+                    const total = ['cv', 'lettre'].reduce((n, k) => {
+                      const f = fd.get(k)
+                      return n + (f instanceof File ? f.size : 0)
+                    }, 0)
+                    if (total > MAX_TOTAL) {
+                      setError('Fichiers trop lourds : 5 Mo au total maximum.')
+                      return
+                    }
                     fd.append('offerTitle', offer.title)
                     fd.append('offerCompany', offer.company ?? '')
                     setSubmitting(true)
@@ -259,7 +274,7 @@ function ApplicationModal({
 }
 
 export function CandidatesContent() {
-  const { hero, offers, cta } = candidatesContent
+  const { hero, cta } = candidatesContent
   const [activeOffer, setActiveOffer] = useState<Offer | null>(null)
 
   return (
@@ -272,12 +287,11 @@ export function CandidatesContent() {
         breadcrumb="Candidats"
       />
 
-      {/* OFFRES D'EMPLOI — servies par Nicoka dès que l'instance est renseignée,
-          sinon on retombe sur les offres de démonstration. */}
-      {nicokaEnabled ? (
-        <NicokaJobs />
-      ) : (
-      <section className="border-b border-border/60 bg-background">
+      {/* CANDIDATURE — formulaire du site, envoyé par email à Nour avec le CV
+          en pièce jointe. L'iframe Nicoka (NicokaJobs) déposait les
+          candidatures dans l'ATS sans prévenir personne : retirée le 23/10/2026
+          à la demande de Nour, qui veut les recevoir sur sa boîte. */}
+      <section id="postuler" className="scroll-mt-24 border-b border-border/60 bg-background">
         <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-24 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
@@ -287,87 +301,27 @@ export function CandidatesContent() {
             className="mx-auto max-w-3xl text-center"
           >
             <p className="font-display text-[11px] font-semibold tracking-[0.2em] text-primary uppercase">
-              {offers.eyebrow}
+              Candidature
             </p>
             <h2 className="mt-4 font-display text-balance text-3xl leading-[1.1] tracking-[-0.02em] text-foreground sm:text-4xl lg:text-[44px]">
-              {offers.title}
+              Déposez votre candidature
             </h2>
             <p className="mt-5 text-base leading-relaxed text-muted-foreground sm:text-[17px]">
-              {offers.description}
+              Envoyez-nous votre CV : nous le lisons personnellement et revenons
+              vers vous dès qu&apos;un poste correspond à votre profil. Toutes nos
+              missions sont confidentielles.
             </p>
-          </motion.div>
-
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.1 }}
-            variants={{
-              hidden: {},
-              visible: { transition: { staggerChildren: 0.08, delayChildren: 0.15 } },
-            }}
-            className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
-          >
-            {offers.items.map((offer) => {
-              const Icon = getIcon(offer.iconName)
-              return (
-                <motion.article
-                  key={offer.title}
-                  variants={{
-                    hidden: { opacity: 0, y: 18 },
-                    visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease } },
-                  }}
-                  className="group flex flex-col rounded-2xl border border-border/60 bg-card p-6 transition-all hover:border-primary/30 hover:shadow-[0_20px_50px_-20px_oklch(0.4_0.07_258/0.18)]"
-                >
-                  {/* En-tête : catégorie + icon */}
-                  <div className="flex items-center justify-between">
-                    <span className="rounded-full bg-primary/10 px-2.5 py-1 font-display text-[11px] font-semibold tracking-[0.12em] text-primary uppercase">
-                      {offer.category}
-                    </span>
-                    <span className="flex size-9 items-center justify-center rounded-lg bg-muted text-muted-foreground transition-colors group-hover:bg-primary/10 group-hover:text-primary">
-                      <Icon className="size-4" aria-hidden />
-                    </span>
-                  </div>
-
-                  {/* Titre + entreprise */}
-                  <h3 className="mt-5 font-display text-lg font-semibold leading-snug text-foreground">
-                    {offer.title}
-                  </h3>
-                  <p className="mt-1.5 text-sm text-muted-foreground">{offer.company}</p>
-
-                  {/* Méta : lieu · contrat · salaire */}
-                  <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1.5 text-xs text-muted-foreground">
-                    <span className="inline-flex items-center gap-1">
-                      <MapPin className="size-3.5" aria-hidden />
-                      {offer.location}
-                    </span>
-                    <span className="size-1 rounded-full bg-border" aria-hidden />
-                    <span className="font-medium">{offer.contract}</span>
-                    <span className="size-1 rounded-full bg-border" aria-hidden />
-                    <span>{offer.salary}</span>
-                  </div>
-
-                  {/* Description courte */}
-                  <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-                    {offer.summary}
-                  </p>
-
-                  {/* Bouton Postuler — pousse en bas de la carte */}
-                  <div className="mt-6 flex-1" />
-                  <button
-                    type="button"
-                    onClick={() => setActiveOffer(offer)}
-                    className="group/btn mt-4 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-foreground px-4 py-2.5 text-sm font-semibold text-background transition-all hover:bg-primary"
-                  >
-                    <span>Postuler à cette offre</span>
-                    <ArrowRight className="size-4 transition-transform duration-300 group-hover/btn:translate-x-0.5" aria-hidden />
-                  </button>
-                </motion.article>
-              )
-            })}
+            <button
+              type="button"
+              onClick={() => setActiveOffer(SPONTANEOUS)}
+              className="group mt-9 inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground shadow-[0_8px_24px_-8px_oklch(0.35_0.095_258/0.5)] transition-all hover:shadow-[0_12px_32px_-8px_oklch(0.35_0.095_258/0.6)]"
+            >
+              <Send className="size-4" aria-hidden />
+              <span>Envoyer ma candidature</span>
+            </button>
           </motion.div>
         </div>
       </section>
-      )}
 
       {/* VOLET 1 — Quel est le process de recrutement ? */}
       <section className="border-b border-border/60 bg-muted/30">

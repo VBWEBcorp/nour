@@ -6,6 +6,7 @@ import path from 'path'
 import { verifyAuth } from '@/lib/auth'
 import { connectDB } from '@/lib/db'
 import { Application } from '@/models/Application'
+import { sendMail } from '@/lib/mailer'
 import { r2Enabled, uploadToR2 } from '@/lib/r2'
 
 export const runtime = 'nodejs'
@@ -78,23 +79,55 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const cvStored = await storeFile(cv, 'candidatures')
-    const lettreStored = hasLettre ? await storeFile(lettre!, 'candidatures') : null
+    const cvBuffer = Buffer.from(await cv.arrayBuffer())
+    const lettreBuffer = hasLettre ? Buffer.from(await lettre!.arrayBuffer()) : null
+    const poste = offerTitle || 'Candidature spontanée'
+    const nom = `${firstName} ${lastName}`
 
-    await connectDB()
-    await Application.create({
-      offerTitle: offerTitle || 'Candidature spontanée',
-      offerCompany: offerCompany || undefined,
-      firstName,
-      lastName,
-      email,
-      phone: phone || undefined,
-      message: message || undefined,
-      cvUrl: cvStored.url,
-      cvName: cvStored.name,
-      lettreUrl: lettreStored?.url,
-      lettreName: lettreStored?.name,
+    // L'email à Nour est ce qui compte : c'est lui qui doit partir. Le CV est
+    // joint, et « Répondre » écrit directement au candidat.
+    const lignes = [
+      `Poste : ${poste}${offerCompany && offerCompany !== 'BYS Consulting' ? ` (${offerCompany})` : ''}`,
+      `Nom : ${nom}`,
+      `Email : ${email}`,
+      phone ? `Téléphone : ${phone}` : '',
+      '',
+      message ? `Message :\n${message}` : '',
+      '',
+      `CV joint${hasLettre ? ', lettre de motivation jointe' : ''}.`,
+    ].filter((l, i, a) => l !== '' || a[i - 1] !== '')
+    await sendMail({
+      subject: `Nouvelle candidature : ${nom} · ${poste}`,
+      text: lignes.join('\n'),
+      replyTo: email,
+      attachments: [
+        { filename: cv.name, content: cvBuffer },
+        ...(lettreBuffer ? [{ filename: lettre!.name, content: lettreBuffer }] : []),
+      ],
     })
+
+    // Archive en base (consultable dans l'admin). Un échec ici ne doit pas
+    // faire croire au candidat que sa candidature est perdue : l'email est parti.
+    try {
+      const cvStored = await storeFile(cv, 'candidatures')
+      const lettreStored = hasLettre ? await storeFile(lettre!, 'candidatures') : null
+      await connectDB()
+      await Application.create({
+        offerTitle: poste,
+        offerCompany: offerCompany || undefined,
+        firstName,
+        lastName,
+        email,
+        phone: phone || undefined,
+        message: message || undefined,
+        cvUrl: cvStored.url,
+        cvName: cvStored.name,
+        lettreUrl: lettreStored?.url,
+        lettreName: lettreStored?.name,
+      })
+    } catch (archiveError) {
+      console.error('Application archive error:', archiveError)
+    }
 
     return NextResponse.json({ success: true })
   } catch (error) {

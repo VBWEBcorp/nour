@@ -67,6 +67,8 @@ type MailOptions = {
   /** Répondre directement au visiteur (son email va ici, pas dans `from`). */
   replyTo?: string
   to?: string
+  /** Pièces jointes (CV, lettre de motivation). */
+  attachments?: { filename: string; content: Buffer }[]
 }
 
 async function sendWithResend(opts: MailOptions): Promise<void> {
@@ -83,6 +85,10 @@ async function sendWithResend(opts: MailOptions): Promise<void> {
       subject: opts.subject,
       text: opts.text,
       html: opts.html,
+      attachments: opts.attachments?.map((a) => ({
+        filename: a.filename,
+        content: a.content.toString('base64'),
+      })),
     }),
   })
 
@@ -102,6 +108,7 @@ async function sendWithSmtp(opts: MailOptions): Promise<void> {
     subject: opts.subject,
     text: opts.text,
     html: opts.html,
+    attachments: opts.attachments,
   })
 }
 
