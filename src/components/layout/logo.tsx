@@ -11,7 +11,7 @@ export function Logo({ className }: LogoProps) {
   return (
     <Link
       href="/"
-      aria-label="BYS Consulting — Accueil"
+      aria-label="BYS Consulting, accueil"
       className={cn(
         'group inline-flex items-center transition-opacity hover:opacity-90',
         className
