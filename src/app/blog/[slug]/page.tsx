@@ -2,10 +2,13 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
 import { blogPosts } from '@/data/blog-posts'
+import { getPost } from '@/lib/blog-data'
 import { defaultOgImage, siteConfig } from '@/lib/seo'
 import BlogPostContent from './blog-post-content'
 
 type Params = Promise<{ slug: string }>
+
+export const revalidate = 3600
 
 export function generateStaticParams() {
   return blogPosts.map((post) => ({ slug: post.slug }))
@@ -13,7 +16,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const { slug } = await params
-  const post = blogPosts.find((p) => p.slug === slug)
+  const post = await getPost(slug)
   if (!post) return {}
 
   const title = post.metaTitle || post.title
@@ -48,7 +51,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
 
 export default async function BlogPostPage({ params }: { params: Params }) {
   const { slug } = await params
-  const post = blogPosts.find((p) => p.slug === slug)
+  const post = await getPost(slug)
   if (!post) notFound()
 
   const jsonLd = {
@@ -73,7 +76,7 @@ export default async function BlogPostPage({ params }: { params: Params }) {
 
   // JSON-LD de PHARE s'il existe (stocké tel quel sur l'article), sinon celui
   // généré ci-dessus. `</script>` échappé pour ne pas casser la balise.
-  const articleLd = ((post as any).jsonLd || JSON.stringify(jsonLd)).replace(/</g, '\\u003c')
+  const articleLd = (post.jsonLd || JSON.stringify(jsonLd)).replace(/</g, '\\u003c')
 
   return (
     <>

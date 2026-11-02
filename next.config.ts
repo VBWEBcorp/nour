@@ -15,6 +15,11 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: '*.r2.dev',
       },
+      // Visuels des articles déposés par PHARE.
+      {
+        protocol: 'https',
+        hostname: 'app.vbweb.fr',
+      },
     ],
   },
   experimental: {

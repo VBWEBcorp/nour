@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 
-import { blogPosts, blogSettings } from '@/data/blog-posts'
+import { blogSettings } from '@/data/blog-posts'
+import { getAllPosts } from '@/lib/blog-data'
 import { defaultOgImage, siteConfig } from '@/lib/seo'
 import BlogPageContent from './blog-page-content'
 
@@ -25,9 +26,11 @@ export const metadata: Metadata = {
   alternates: { canonical: '/blog' },
 }
 
-export default function BlogPage() {
-  const posts = [...blogPosts]
-    .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
+// Régénérée par la route PHARE à chaque dépôt (revalidatePath), et au pire toutes les heures.
+export const revalidate = 3600
+
+export default async function BlogPage() {
+  const posts = (await getAllPosts())
     .map((p) => ({
       _id: p.slug,
       title: p.title,

@@ -284,10 +284,11 @@ export async function POST(req: Request) {
 
     const jsonLd = jsonLdToString(body.jsonLd)
     const now = new Date()
-    // Date de publication affichée : celle de PHARE quand il en donne une (article programmé à
-    // une date passée), sinon maintenant. Posée à la création seulement : une mise à jour n'est
-    // pas une nouvelle publication.
-    const publishedAt = parsePublishedAt(body.publishedAt) ?? now
+    // Date de publication affichée : celle de PHARE quand il en donne une. PHARE envoie toujours
+    // la vraie date de première publication (date programmée, ou date d'origine lors d'une mise
+    // à jour) : elle fait foi, y compris pour redater un article déjà déposé. Sans date, on
+    // tamponne maintenant à la création seulement.
+    const sentPublishedAt = parsePublishedAt(body.publishedAt)
 
     // 7. UPSERT par slug — jamais de doublon si PHARE renvoie le même article
     const res = await BlogPost.updateOne(
@@ -310,9 +311,10 @@ export async function POST(req: Request) {
           // Déposé EN LIGNE : il sort dans /blog et à son adresse, jamais en
           // brouillon (un brouillon renverrait 404).
           published: true,
+          ...(sentPublishedAt ? { publishedAt: sentPublishedAt } : {}),
         },
         $setOnInsert: {
-          publishedAt,
+          ...(sentPublishedAt ? {} : { publishedAt: now }),
           category: 'Actualités',
         },
       },

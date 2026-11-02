@@ -2,8 +2,9 @@ import type { MetadataRoute } from 'next'
 
 import { siteConfig } from '@/lib/seo'
 import { connectDB } from '@/lib/db'
-import { BlogPost, BlogSettings } from '@/models/Blog'
-import { visiblePostFilter } from '@/lib/blog-filters'
+import { BlogSettings } from '@/models/Blog'
+import { blogSettings as staticBlogSettings } from '@/data/blog-posts'
+import { getAllPosts } from '@/lib/blog-data'
 import { GallerySettings } from '@/models/Gallery'
 
 const baseUrl = siteConfig.url
@@ -61,9 +62,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       })
     }
 
-    // Blog pages if enabled
+    // Blog : activé par le réglage en base, ou à défaut par le fichier statique.
     const blogSettings = await BlogSettings.findOne()
-    if (blogSettings?.enabled) {
+    if (blogSettings ? blogSettings.enabled : staticBlogSettings.enabled) {
       pages.push({
         url: `${baseUrl}/blog`,
         lastModified: new Date(),
@@ -71,12 +72,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.8,
       })
 
-      // Individual blog posts
-      const posts = await BlogPost.find(visiblePostFilter()).select('slug updatedAt publishedAt')
-      for (const post of posts) {
+      // Articles de la base et du fichier statique, comme les sert /blog.
+      for (const post of await getAllPosts()) {
         pages.push({
           url: `${baseUrl}/blog/${post.slug}`,
-          lastModified: new Date(post.updatedAt || post.publishedAt),
+          lastModified: new Date(post.publishedAt),
           changeFrequency: 'weekly',
           priority: 0.7,
         })
