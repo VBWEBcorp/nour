@@ -70,6 +70,11 @@ export const metadata: Metadata = {
   alternates: {
     canonical: '/',
   },
+  // Balise de vérification Search Console : code fourni par Google, posé dans la variable Netlify
+  // NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION par le programme de branchement de PHARE, puis redéploiement.
+  ...(process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION && {
+    verification: { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION },
+  }),
 }
 
 export const viewport: Viewport = {
