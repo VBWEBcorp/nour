@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 
 import { breadcrumbJsonLd, webPageJsonLd } from '@/components/seo/json-ld'
+import { getJobOffers } from '@/lib/nicoka-jobs'
 
 import { CandidatesContent } from './candidates-content'
 
@@ -24,14 +25,19 @@ const jsonLd = {
   ],
 }
 
-export default function CandidatsPage() {
+/** Les offres Nicoka se rafraîchissent toutes les dix minutes. */
+export const revalidate = 600
+
+export default async function CandidatsPage() {
+  const offers = await getJobOffers()
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <CandidatesContent />
+      <CandidatesContent offers={offers} />
     </>
   )
 }

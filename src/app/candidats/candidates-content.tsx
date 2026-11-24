@@ -6,12 +6,14 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
 import { JobFamilies } from '@/components/sections/job-families'
+import { JobOffers } from '@/components/sections/job-offers'
 import { PageHero } from '@/components/sections/page-hero'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { candidateProcess, whyApply } from '@/lib/bys-content'
 import { getIcon } from '@/lib/icons'
+import type { JobOffer } from '@/lib/nicoka-jobs'
 import { candidatesContent } from '@/lib/site-content'
 import { cn } from '@/lib/utils'
 
@@ -273,7 +275,7 @@ function ApplicationModal({
   )
 }
 
-export function CandidatesContent() {
+export function CandidatesContent({ offers }: { offers: JobOffer[] | null }) {
   const { hero, cta } = candidatesContent
   const [activeOffer, setActiveOffer] = useState<Offer | null>(null)
 
@@ -287,10 +289,12 @@ export function CandidatesContent() {
         breadcrumb="Candidats"
       />
 
-      {/* CANDIDATURE — formulaire du site, envoyé par email à Nour avec le CV
-          en pièce jointe. L'iframe Nicoka (NicokaJobs) déposait les
-          candidatures dans l'ATS sans prévenir personne : retirée le 23/10/2026
-          à la demande de Nour, qui veut les recevoir sur sa boîte. */}
+      {/* OFFRES : lues dans Nicoka côté serveur. Pas d'iframe : elle déposait les
+          candidatures dans l'ATS sans prévenir Nour (retirée le 23/10/2026). */}
+      <JobOffers offers={offers} onApply={setActiveOffer} />
+
+      {/* CANDIDATURE : formulaire du site, envoyé par email à Nour avec le CV
+          en pièce jointe, à sa demande. */}
       <section id="postuler" className="scroll-mt-24 border-b border-border/60 bg-background">
         <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-24 lg:px-8">
           <motion.div
